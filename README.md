@@ -1,0 +1,1 @@
+To run: open flashcards.html in a web browser.

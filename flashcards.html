@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Státnicové flashcards – PVA</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header>
+  <h1>Státnice <span>PVA</span> – Flashcards</h1>
+  <div class="subtitle">Operační &amp; souborové systémy (PB152) · Výpočetní architektury (PB151) · Regulární jazyky, Rozhodnutelnost &amp; Složitost (IB110)</div>
+</header>
+
+<div class="controls" id="filters"></div>
+
+<div class="stats">
+  <span>Balíček: <b id="deckSize">0</b> karet</span>
+  <span>✅ Umím: <b id="knownCount">0</b></span>
+  <span>🔁 Opakovat: <b id="againCount">0</b></span>
+</div>
+
+<div class="scene">
+  <div class="card" id="card" onclick="flip()">
+    <div class="face front">
+      <div class="topic-tag" id="frontTag"></div>
+      <div class="face-label">Otázka</div>
+      <div class="q-text" id="qText"></div>
+      <div class="hint">Klikni nebo stiskni <kbd>mezerník</kbd> pro odpověď</div>
+    </div>
+    <div class="face back">
+      <div class="topic-tag" id="backTag"></div>
+      <div class="face-label">Odpověď</div>
+      <div class="a-text" id="aText"></div>
+    </div>
+  </div>
+</div>
+
+<div class="nav">
+  <button class="btn" onclick="prev(event)">← Zpět</button>
+  <span class="counter" id="counter">0 / 0</span>
+  <button class="btn primary" onclick="next(event)">Další →</button>
+</div>
+<div class="nav">
+  <button class="btn again" onclick="mark('again', event)">🔁 Opakovat</button>
+  <button class="btn known" onclick="mark('known', event)">✅ Umím</button>
+  <button class="btn" onclick="shuffle(event)">🔀 Zamíchat</button>
+  <button class="btn" onclick="resetProgress(event)">♻️ Reset</button>
+</div>
+
+<div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+
+<footer>
+  Ovládání: <kbd>←</kbd> <kbd>→</kbd> navigace · <kbd>mezerník</kbd> otočit ·
+  <kbd>K</kbd> umím · <kbd>O</kbd> opakovat · <kbd>S</kbd> zamíchat<br>
+  Postup se ukládá do prohlížeče (localStorage).
+</footer>
+
+<!-- Data: jeden soubor na otázku (téma). Nové téma = přidej soubor a <script> řádek. -->
+<script src="data/cards-os.js"></script>
+<script src="data/cards-fs.js"></script>
+<script src="data/cards-arch.js"></script>
+<script src="data/cards-reg.js"></script>
+<script src="data/cards-dec.js"></script>
+<script src="data/cards-cmp.js"></script>
+
+<!-- Logika (musí být až za daty) -->
+<script src="app.js"></script>
+</body>
+</html>

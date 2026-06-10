@@ -11,12 +11,8 @@ const TOPICS = FC.topics;
 // Pořadí témat podle pole "order" v datových souborech
 const TOPIC_ORDER = Object.keys(TOPICS).sort((a, b) => TOPICS[a].order - TOPICS[b].order);
 
-// Filtry = "Vše" + jednotlivá témata (v pořadí) + "Jen k opakování"
-const FILTERS = [
-  { id: "all", label: "📚 Vše" },
-  ...TOPIC_ORDER.map(id => ({ id, label: TOPICS[id].label })),
-  { id: "again", label: "🔁 Jen k opakování" }
-];
+// Témata s order <= 11 patří do teoretické části (TZI), zbytek do praktické (PVIS)
+const THEORY_MAX_ORDER = 11;
 
 let deck = [], idx = 0, flipped = false;
 let filter = "all";
@@ -26,13 +22,34 @@ let progress = JSON.parse(localStorage.getItem(KEY) || "{}");
 function buildFilters() {
   const el = document.getElementById("filters");
   el.innerHTML = "";
-  FILTERS.forEach(f => {
+
+  const addChip = (id, label) => {
     const c = document.createElement("div");
-    c.className = "chip" + (filter === f.id ? " active" : "");
-    c.textContent = f.label;
-    c.onclick = () => { filter = f.id; buildDeck(); buildFilters(); };
+    c.className = "chip" + (filter === id ? " active" : "");
+    c.textContent = label;
+    c.onclick = () => { filter = id; buildDeck(); buildFilters(); };
     el.appendChild(c);
-  });
+  };
+  const addSection = (text) => {
+    const s = document.createElement("div");
+    s.className = "filter-section";
+    s.textContent = text;
+    el.appendChild(s);
+  };
+
+  // Obecné filtry
+  addChip("all", "📚 Vše");
+  addChip("again", "🔁 Jen k opakování");
+
+  // Teoretická část
+  addSection("Teoretické základy");
+  TOPIC_ORDER.filter(id => TOPICS[id].order <= THEORY_MAX_ORDER)
+    .forEach(id => addChip(id, TOPICS[id].label));
+
+  // Praktická část
+  addSection("Programové a inf. systémy");
+  TOPIC_ORDER.filter(id => TOPICS[id].order > THEORY_MAX_ORDER)
+    .forEach(id => addChip(id, TOPICS[id].label));
 }
 
 function cardId(card) { return CARDS.indexOf(card); }

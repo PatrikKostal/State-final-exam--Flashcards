@@ -3,7 +3,7 @@
 
 window.FC = window.FC || { topics: {}, cards: [] };
 
-FC.topics.reg = { label: "🔤 Regulární jazyky", cls: "tag-reg", order: 4 };
+FC.topics.reg = { label: "🔤 Regulární jazyky", cls: "tag-reg", order: 9 };
 
 FC.cards.push(
   { t: "reg",
@@ -60,5 +60,17 @@ FC.cards.push(
 
   { t: "reg",
     q: "Co říká Myhill–Nerodova věta?",
-    a: "<b>Charakterizace regulárních jazyků pomocí ekvivalence na slovech.</b><ul><li>Jazyk L je regulární <b>právě tehdy</b>, když relace \"nerozlišitelnosti\" má <b>konečně mnoho tříd</b></li><li>Počet těchto tříd = počet stavů <b>minimálního DFA</b></li><li>Dává metodu <b>minimalizace automatu</b> a alternativní důkaz neregularity</li></ul>" }
+    a: "<b>Charakterizace regulárních jazyků pomocí ekvivalence na slovech.</b><ul><li>Jazyk L je regulární <b>právě tehdy</b>, když relace \"nerozlišitelnosti\" má <b>konečně mnoho tříd</b></li><li>Počet těchto tříd = počet stavů <b>minimálního DFA</b></li><li>Dává metodu <b>minimalizace automatu</b> a alternativní důkaz neregularity</li></ul>" },
+
+  { t: "reg",
+    q: "Co je gramatika? (formální definice jako čtveřice)",
+    a: "<b>Gramatika G = (N, Σ, P, S):</b><ul><li><b>N</b> – konečná množina <b>neterminálů</b> (pomocné symboly)</li><li><b>Σ</b> – množina <b>terminálů</b> (symboly jazyka), N ∩ Σ = ∅</li><li><b>P</b> – množina <b>přepisovacích pravidel</b> α → β</li><li><b>S ∈ N</b> – počáteční (startovací) symbol</li></ul>Jazyk gramatiky = všechna slova z terminálů odvoditelná ze S. Tvar pravidel určuje <b>typ v Chomského hierarchii</b>." },
+
+  { t: "reg",
+    q: "Jak převést konečný automat na regulární výraz a na gramatiku?",
+    a: "<ul><li><b>DFA → regulární výraz</b>: <b>metoda eliminace stavů</b> – postupně odstraňujeme stavy a hrany přeznačujeme regulárními výrazy, až zbyde počáteční a koncový stav spojený jediným výrazem (lze i přes soustavu rovnic / Ardenovo lemma)</li><li><b>Automat → (pravá lineární) gramatika</b>: stavy = neterminály; přechod p --a--&gt; q dá pravidlo <code>p → a q</code>; pro přijímající stav přidáme <code>p → ε</code></li></ul>" },
+
+  { t: "reg",
+    q: "Co je paralelní (synchronní) kompozice automatů?",
+    a: "<b>Konstrukce produktového automatu, který simuluje dva automaty zároveň.</b><ul><li>Stavy = <b>dvojice (p, q)</b> stavů obou automatů</li><li>Na vstupní symbol oba automaty udělají přechod <b>synchronně</b></li><li>Volbou přijímajících stavů získáme <b>průnik</b> (oba přijímají) nebo <b>sjednocení</b> (aspoň jeden) jazyků</li></ul>Je to základ důkazu uzávěrových vlastností na průnik a rozdíl." }
 );

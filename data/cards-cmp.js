@@ -3,7 +3,7 @@
 
 window.FC = window.FC || { topics: {}, cards: [] };
 
-FC.topics.cmp = { label: "⏱️ Složitost", cls: "tag-cmp", order: 6 };
+FC.topics.cmp = { label: "⏱️ Složitost", cls: "tag-cmp", order: 11 };
 
 FC.cards.push(
   { t: "cmp",
@@ -52,5 +52,13 @@ FC.cards.push(
 
   { t: "cmp",
     q: "Jaké další složitostní třídy navazují na P a NP?",
-    a: "<ul><li><b>co-NP</b> – doplňky NP problémů (rychlé ověření \"NE\" instance)</li><li><b>PSPACE</b> – řešitelné v polynomiálním <b>prostoru</b>; platí P ⊆ NP ⊆ PSPACE</li><li><b>EXPTIME</b> – exponenciální čas</li><li><b>L / NL</b> – logaritmický prostor</li></ul>Známé ostré oddělení: <b>P ⊊ EXPTIME</b>. Většina vztahů (P vs NP, NP vs PSPACE) zůstává otevřená." }
+    a: "<ul><li><b>co-NP</b> – doplňky NP problémů (rychlé ověření \"NE\" instance)</li><li><b>PSPACE</b> – řešitelné v polynomiálním <b>prostoru</b>; platí P ⊆ NP ⊆ PSPACE</li><li><b>EXPTIME</b> – exponenciální čas</li><li><b>L / NL</b> – logaritmický prostor</li></ul>Známé ostré oddělení: <b>P ⊊ EXPTIME</b>. Většina vztahů (P vs NP, NP vs PSPACE) zůstává otevřená." },
+
+  { t: "cmp",
+    q: "Co říká Savitchova věta a jaký je vztah PSPACE a NPSPACE?",
+    a: "<b>Savitchova věta: NPSPACE = PSPACE</b>, přesněji NSPACE(f) ⊆ DSPACE(f²).<ul><li>Nedeterministický prostor lze deterministicky simulovat s <b>jen kvadratickým nárůstem</b> paměti</li><li>Důvod „kvadraticky\": rekurzivní procedura <b>REACH</b> (dosažitelnost konfigurace v 2ᵏ krocích přes půlení) <b>šetří paměť</b> – znovupoužívá stejný prostor pro podvýpočty</li></ul>Důsledek: u <b>prostorové</b> složitosti determinismus vs nedeterminismus nehraje velkou roli (na rozdíl od otevřeného P vs NP)." },
+
+  { t: "cmp",
+    q: "Jak se dokazuje korektnost a složitost řadicích algoritmů (invariant cyklu)?",
+    a: "<ul><li><b>Korektnost přes invariant cyklu</b>: tvrzení platné před každou iterací. Dokáže se <b>inicializace</b> (platí na začátku), <b>zachování</b> (iterace ho udrží), <b>ukončení</b> (po skončení dává správnost). Příklad: u select sortu je invariant „prvních i prvků je seřazeno a jsou nejmenší\".</li><li><b>Složitost</b>: select sort O(n²), merge sort O(n log n), <b>quicksort</b> průměrně O(n log n), nejhůř O(n²)</li></ul>" }
 );

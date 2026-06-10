@@ -3,7 +3,7 @@
 
 window.FC = window.FC || { topics: {}, cards: [] };
 
-FC.topics.dec = { label: "🛑 Rozhodnutelnost", cls: "tag-dec", order: 5 };
+FC.topics.dec = { label: "🛑 Rozhodnutelnost", cls: "tag-dec", order: 10 };
 
 FC.cards.push(
   { t: "dec",
@@ -44,5 +44,9 @@ FC.cards.push(
 
   { t: "dec",
     q: "Co je univerzální Turingův stroj?",
-    a: "<b>Turingův stroj U, který dokáže simulovat libovolný jiný TS.</b><ul><li>Na vstupu dostane <b>popis stroje M (kód) a vstup w</b> a simuluje běh M na w</li><li>Je teoretickým základem <b>programovatelného počítače</b> (program jako data)</li><li>Existence U umožňuje diagonalizační konstrukce (např. důkaz halting problému)</li></ul>" }
+    a: "<b>Turingův stroj U, který dokáže simulovat libovolný jiný TS.</b><ul><li>Na vstupu dostane <b>popis stroje M (kód) a vstup w</b> a simuluje běh M na w</li><li>Je teoretickým základem <b>programovatelného počítače</b> (program jako data)</li><li>Existence U umožňuje diagonalizační konstrukce (např. důkaz halting problému)</li></ul>" },
+
+  { t: "dec",
+    q: "Jak souvisí rozhodnutelnost s Chomského hierarchií?",
+    a: "<ul><li><b>Typ 0 (obecné gramatiky) = rekurzivně spočetné jazyky</b> = jazyky přijímané Turingovým strojem = <b>částečně rozhodnutelné</b></li><li><b>Rozhodnutelné (rekurzivní) jazyky</b> leží <b>mezi</b> kontextovými (typ 1) a rekurzivně spočetnými (typ 0) – tvoří vlastní třídu, která není přímo v Chomského hierarchii</li><li>Kontextové (typ 1) ⊂ rozhodnutelné ⊂ částečně rozhodnutelné (typ 0)</li></ul>Existují i jazyky mimo typ 0 (ani částečně rozhodnutelné), např. doplněk HALT." }
 );

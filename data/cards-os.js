@@ -3,7 +3,7 @@
 
 window.FC = window.FC || { topics: {}, cards: [] };
 
-FC.topics.os = { label: "💻 Operační systémy", cls: "tag-os", order: 1 };
+FC.topics.os = { label: "💻 Operační systémy", cls: "tag-os", order: 17 };
 
 FC.cards.push(
   { t: "os",
@@ -100,5 +100,29 @@ FC.cards.push(
 
   { t: "os",
     q: "Co je virtualizace a jaké jsou její typy?",
-    a: "<b>Vytvoření abstraktní/izolované verze prostředku.</b><ul><li><b>Plná virtualizace (hypervisor)</b> – běh celého hostovaného OS. <b>Typ 1 (bare-metal)</b>: Xen, ESXi; <b>Typ 2 (hosted)</b>: VirtualBox, VMware Workstation</li><li><b>Paravirtualizace</b> – host OS upraven, ví o hypervisoru (rychlejší)</li><li><b>Kontejnery</b> – virtualizace na úrovni OS, sdílené jádro, izolace přes namespaces + cgroups (Docker, LXC). Lehčí než VM.</li></ul>" }
+    a: "<b>Vytvoření abstraktní/izolované verze prostředku.</b><ul><li><b>Plná virtualizace (hypervisor)</b> – běh celého hostovaného OS. <b>Typ 1 (bare-metal)</b>: Xen, ESXi; <b>Typ 2 (hosted)</b>: VirtualBox, VMware Workstation</li><li><b>Paravirtualizace</b> – host OS upraven, ví o hypervisoru (rychlejší)</li><li><b>Kontejnery</b> – virtualizace na úrovni OS, sdílené jádro, izolace přes namespaces + cgroups (Docker, LXC). Lehčí než VM.</li></ul>" },
+
+  { t: "os",
+    q: "Z čeho se skládá operační systém (architektura)?",
+    a: "<ul><li><b>Jádro (kernel)</b> – správa HW, procesů, paměti; běží privilegovaně</li><li><b>Knihovny</b> – rozhraní mezi aplikacemi a jádrem (libc), poskytují wrappery syscallů</li><li><b>Démoni / služby</b> – procesy běžící na pozadí (logování, síť, plánovač)</li><li><b>Uživatelské rozhraní</b> – shell, GUI</li></ul>Po startu jádro spustí první proces <b>init / systemd</b> (PID 1), který nastartuje ostatní služby." },
+
+  { t: "os",
+    q: "Jak se vypočítá velikost stránky a její vliv?",
+    a: "<b>Velikost stránky je mocnina dvojky (typicky 4 KiB = 2¹²).</b><ul><li>Počet bitů offsetu uvnitř stránky = log₂(velikost stránky); zbytek virtuální adresy je číslo stránky</li><li>Příklad: 32bitová adresa, stránka 4 KiB → 12 bitů offset, 20 bitů číslo stránky → 2²⁰ stránek</li></ul><b>Velká stránka</b>: méně záznamů v tabulce a méně TLB miss, ale větší <b>interní fragmentace</b>." },
+
+  { t: "os",
+    q: "Co je hladovění (starvation) a jak souvisí s deadlockem?",
+    a: "<b>Starvation (hladovění) – proces se neustále odkládá a nikdy nedostane potřebný zdroj/CPU.</b><ul><li>Příčina: nespravedlivé plánování nebo priority (nízkoprioritní proces je trvale přeskakován)</li><li>Řešení: <b>aging</b> – postupné zvyšování priority čekajícího procesu</li></ul>Rozdíl od <b>deadlocku</b>: u deadlocku se procesy <b>vzájemně blokují</b> (nikdo nepokračuje), u starvation systém běží, jen konkrétní proces nedostane šanci." },
+
+  { t: "os",
+    q: "Co je problém producenta a konzumenta?",
+    a: "<b>Klasický synchronizační problém: producent vkládá data do sdíleného omezeného bufferu, konzument je odebírá.</b><ul><li>Producent musí <b>počkat, je-li buffer plný</b>; konzument <b>počkat, je-li prázdný</b></li><li>Řeší se <b>semafory</b>: jeden počítá volná místa, druhý obsazená, plus <b>mutex</b> na vzájemné vyloučení přístupu k bufferu</li></ul>Demonstruje vzájemné vyloučení i podmíněné čekání." },
+
+  { t: "os",
+    q: "Jak fungují přerušení a jaké jsou jejich typy?",
+    a: "<b>Přerušení = signál, který přeruší běh procesoru a předá řízení obslužné rutině (handler).</b><ul><li><b>Hardwarové (vnější)</b> – od zařízení (klávesnice, časovač, disk) – asynchronní</li><li><b>Softwarové</b> – vyvolaná instrukcí (systémové volání přes trap)</li><li><b>Výjimky (exceptions)</b> – chyby za běhu (dělení nulou, page fault)</li></ul>Po obsloužení se obnoví původní kontext. Časovač pomocí přerušení umožňuje <b>preemptivní plánování</b>." },
+
+  { t: "os",
+    q: "Jaký je rozdíl mezi programem, procesem a vláknem?",
+    a: "<ul><li><b>Program</b> – <b>pasivní</b> spustitelný soubor (kód a data) na disku</li><li><b>Proces</b> – <b>běžící</b> instance programu s vlastním adresním prostorem a zdroji</li><li><b>Vlákno</b> – jednotka výpočtu uvnitř procesu, <b>sdílí</b> jeho adresní prostor; proces má aspoň jedno vlákno</li></ul>" }
 );

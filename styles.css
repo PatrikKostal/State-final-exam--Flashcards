@@ -37,6 +37,11 @@ h1 span { color: #a5b4fc; }
 }
 .chip:hover { border-color: var(--accent); }
 .chip.active { background: var(--accent); border-color: var(--accent); color: #fff; font-weight: 600; }
+.filter-section {
+  flex-basis: 100%; text-align: center; color: #64748b;
+  font-size: 0.68rem; text-transform: uppercase; letter-spacing: 1.5px;
+  font-weight: 700; margin: 8px 0 2px;
+}
 
 .stats {
   display: flex; gap: 16px; justify-content: center; margin-bottom: 14px;
@@ -75,6 +80,22 @@ h1 span { color: #a5b4fc; }
 .tag-dec { background: #fef3c7; color: #b45309; }
 .tag-cmp { background: #fee2e2; color: #b91c1c; }
 .tag-arch { background: #cffafe; color: #0e7490; }
+.tag-lin { background: #e0e7ff; color: #3730a3; }
+.tag-ana { background: #fae8ff; color: #86198f; }
+.tag-stat { background: #ccfbf1; color: #0f766e; }
+.tag-graph { background: #fef9c3; color: #854d0e; }
+.tag-galg { background: #ffedd5; color: #9a3412; }
+.tag-tree { background: #ecfccb; color: #3f6212; }
+.tag-alg { background: #e0f2fe; color: #075985; }
+.tag-fun { background: #fce7f3; color: #9d174d; }
+.tag-oop { background: #f3e8ff; color: #6b21a8; }
+.tag-low { background: #ffe4e6; color: #9f1239; }
+.tag-db { background: #d1fae5; color: #065f46; }
+.tag-sql { background: #cffafe; color: #155e75; }
+.tag-net { background: #fef08a; color: #713f12; }
+.tag-netsec { background: #fed7aa; color: #7c2d12; }
+.tag-sec { background: #fecaca; color: #7f1d1d; }
+.tag-appsec { background: #ddd6fe; color: #5b21b6; }
 .q-text { font-size: 1.3rem; font-weight: 650; line-height: 1.45; margin: auto 0; }
 .a-text { font-size: 0.98rem; line-height: 1.6; }
 .a-text ul { margin: 8px 0 8px 20px; }

@@ -3,7 +3,7 @@
 
 window.FC = window.FC || { topics: {}, cards: [] };
 
-FC.topics.fs = { label: "🗄️ Souborové systémy", cls: "tag-fs", order: 2 };
+FC.topics.fs = { label: "🗄️ Souborové systémy", cls: "tag-fs", order: 18 };
 
 FC.cards.push(
   { t: "fs",
@@ -76,5 +76,17 @@ FC.cards.push(
 
   { t: "fs",
     q: "Co je page cache / buffer cache?",
-    a: "<b>Cache obsahu souborů a diskových bloků v RAM, kterou spravuje jádro.</b><ul><li>Opakovaná čtení jdou z RAM místo z disku → výrazné zrychlení</li><li>Zápisy se často odkládají (<b>write-back</b>) a slučují; <code>sync</code> je vynutí na disk</li><li>Riziko ztráty neuložených dat při pádu → proto žurnálování a <code>fsync</code></li></ul>" }
+    a: "<b>Cache obsahu souborů a diskových bloků v RAM, kterou spravuje jádro.</b><ul><li>Opakovaná čtení jdou z RAM místo z disku → výrazné zrychlení</li><li>Zápisy se často odkládají (<b>write-back</b>) a slučují; <code>sync</code> je vynutí na disk</li><li>Riziko ztráty neuložených dat při pádu → proto žurnálování a <code>fsync</code></li></ul>" },
+
+  { t: "fs",
+    q: "Jak je uspořádán souborový systém na disku?",
+    a: "<b>Typické rozložení (unixový FS):</b><ul><li><b>Boot blok</b> – zaváděcí kód</li><li><b>Superblok</b> – metadata celého FS (velikost, počet inode/bloků, umístění struktur)</li><li><b>Bitmapy</b> – evidence volných inode a volných datových bloků</li><li><b>Tabulka inode</b> – metadata všech souborů</li><li><b>Datové bloky</b> – samotný obsah souborů a adresářů</li></ul>" },
+
+  { t: "fs",
+    q: "Proč a jak se v souborových systémech používají B+ stromy?",
+    a: "<b>Moderní FS (NTFS, btrfs, XFS, ext4 HTree) indexují adresáře a metadata B+ stromy.</b><ul><li><b>Malá výška</b> → málo přístupů na disk i u velkých adresářů (O(log n) místo lineárního hledání)</li><li>Uzly odpovídají velikosti bloku, listy propojené → efektivní procházení</li><li>Rychlé vyhledání souboru podle jména i rozsahové operace</li></ul>" },
+
+  { t: "fs",
+    q: "Je čtení u RAID 1 rychlejší než u RAID 0?",
+    a: "<ul><li><b>RAID 0 (striping)</b> – zápis i čtení paralelně přes oba disky → vysoká propustnost, ale data jen jednou</li><li><b>RAID 1 (mirroring)</b> – stejná data na obou discích, takže <b>čtení lze rozdělit mezi disky</b> (každý čte jinou část / vyřídí jiný požadavek) → čtení může být velmi rychlé. <b>Zápis</b> ale musí na oba (žádné zrychlení).</li></ul>U HDD hraje roli i poloha hlaviček – nezávislé hlavy obslouží více požadavků současně." }
 );

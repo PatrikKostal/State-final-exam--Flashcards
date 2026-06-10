@@ -3,7 +3,7 @@
 
 window.FC = window.FC || { topics: {}, cards: [] };
 
-FC.topics.arch = { label: "🔧 Výpočetní architektury", cls: "tag-arch", order: 3 };
+FC.topics.arch = { label: "🔧 Výpočetní architektury", cls: "tag-arch", order: 14 };
 
 FC.cards.push(
   { t: "arch",
@@ -80,5 +80,17 @@ FC.cards.push(
 
   { t: "arch",
     q: "Co je cache hit/miss a jak se cache mapuje?",
-    a: "<ul><li><b>Hit</b> – data jsou v cache (rychlé); <b>Miss</b> – nejsou, nutno z pomalejší paměti. <b>Hit rate</b> určuje efektivitu.</li><li><b>Mapování</b>: <b>přímé</b> (blok má 1 možné místo – rychlé, časté konflikty), <b>plně asociativní</b> (kamkoli – pružné, drahé), <b>množinově asociativní</b> (kompromis, např. 4-cestné)</li><li><b>Politika nahrazování</b>: LRU, FIFO, random; <b>zápis</b>: write-through vs write-back</li></ul>" }
+    a: "<ul><li><b>Hit</b> – data jsou v cache (rychlé); <b>Miss</b> – nejsou, nutno z pomalejší paměti. <b>Hit rate</b> určuje efektivitu.</li><li><b>Mapování</b>: <b>přímé</b> (blok má 1 možné místo – rychlé, časté konflikty), <b>plně asociativní</b> (kamkoli – pružné, drahé), <b>množinově asociativní</b> (kompromis, např. 4-cestné)</li><li><b>Politika nahrazování</b>: LRU, FIFO, random; <b>zápis</b>: write-through vs write-back</li></ul>" },
+
+  { t: "arch",
+    q: "Jak se reprezentují reálná čísla (IEEE 754)?",
+    a: "<b>Norma IEEE 754 ukládá číslo ve tvaru ± mantisa × 2^exponent.</b> Pro 32bit (single):<ul><li><b>1 bit znaménko</b></li><li><b>8 bitů exponent</b> (s posunem/bias 127)</li><li><b>23 bitů mantisa</b> (s implicitní jedničkou před desetinnou čárkou)</li></ul>Umožňuje obrovský rozsah, ale jen <b>konečnou přesnost</b> → zaokrouhlovací chyby (0.1 nelze přesně). Speciální hodnoty: ±0, ±∞, NaN." },
+
+  { t: "arch",
+    q: "Co jsou minimalizační metody logických funkcí?",
+    a: "<b>Zjednodušení booleovského výrazu na méně hradel.</b><ul><li><b>Booleova algebra</b> – úpravy podle zákonů (de Morgan, distributivita…)</li><li><b>Karnaughova mapa (K-mapa)</b> – grafická metoda: do tabulky se zakreslí jedničky a slučují se sousední do co největších skupin (mocniny 2)</li><li><b>Quine–McCluskey</b> – tabulková, algoritmizovatelná metoda pro více proměnných</li></ul>Cíl: menší, levnější a rychlejší obvod." },
+
+  { t: "arch",
+    q: "Co je polosčítačka a úplná sčítačka?",
+    a: "<ul><li><b>Polosčítačka (half adder)</b> – sečte 2 bity, výstupy <b>součet S = A⊕B</b> (XOR) a <b>přenos C = A·B</b> (AND). Neumí započítat přenos zdola.</li><li><b>Úplná sčítačka (full adder)</b> – sečte 3 bity (A, B, přenos Cᵢₙ), dává součet a přenos. Řetězením úplných sčítaček vznikne <b>vícebitová sčítačka</b>.</li></ul>" }
 );

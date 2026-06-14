@@ -96,6 +96,7 @@ h1 span { color: #a5b4fc; }
 .tag-netsec { background: #fed7aa; color: #7c2d12; }
 .tag-sec { background: #fecaca; color: #7f1d1d; }
 .tag-appsec { background: #ddd6fe; color: #5b21b6; }
+.tag-par { background: #99f6e4; color: #115e59; }
 .q-text { font-size: 1.3rem; font-weight: 650; line-height: 1.45; margin: auto 0; }
 .a-text { font-size: 0.98rem; line-height: 1.6; }
 .a-text ul { margin: 8px 0 8px 20px; }

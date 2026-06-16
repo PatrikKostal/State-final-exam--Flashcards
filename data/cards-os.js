@@ -124,5 +124,37 @@ FC.cards.push(
 
   { t: "os",
     q: "Jaký je rozdíl mezi programem, procesem a vláknem?",
-    a: "<ul><li><b>Program</b> – <b>pasivní</b> spustitelný soubor (kód a data) na disku</li><li><b>Proces</b> – <b>běžící</b> instance programu s vlastním adresním prostorem a zdroji</li><li><b>Vlákno</b> – jednotka výpočtu uvnitř procesu, <b>sdílí</b> jeho adresní prostor; proces má aspoň jedno vlákno</li></ul>" }
+    a: "<ul><li><b>Program</b> – <b>pasivní</b> spustitelný soubor (kód a data) na disku</li><li><b>Proces</b> – <b>běžící</b> instance programu s vlastním adresním prostorem a zdroji</li><li><b>Vlákno</b> – jednotka výpočtu uvnitř procesu, <b>sdílí</b> jeho adresní prostor; proces má aspoň jedno vlákno</li></ul>" },
+
+  { t: "os",
+    q: "Jaké jsou architektury OS kromě monolitického a mikrojádra?",
+    a: "<ul><li><b>Vrstvené</b> – jako ISO/OSI pro celý OS; rozdrobené, drahá režie (Windows NT 4.0)</li><li><b>Modulární</b> – komponenty jádra jako v OOP přes rozhraní (macOS)</li><li><b>Klient-server</b> – procesy klientské/serverové (jako mikrojádro)</li></ul>Minimalistické: <b>Unikernel</b> (jádro pro jedinou aplikaci), <b>Exokernel</b> (přímý přístup aplikací k HW). Hybridní jádro (Windows) kombinuje výhody mono i mikro." },
+
+  { t: "os",
+    q: "Co je DMA a IPC?",
+    a: "<ul><li><b>DMA (Direct Memory Access)</b> – HW přistupuje do RAM <b>nezávisle na CPU</b> (asynchronně); CPU si výsledek jen občas přečte → odlehčení procesoru</li><li><b>IPC (meziprocesová komunikace)</b> – procesy mají izolovanou paměť, komunikují přes <b>sdílenou paměť, sokety, roury, zprávy</b> (MPI)</li></ul>Vlákna oproti procesům sdílí paměť přímo (jen reference)." },
+
+  { t: "os",
+    q: "Co je PCB/TCB a co se děje při přepnutí kontextu?",
+    a: "<ul><li><b>PCB (Process Control Block)</b> – jádro v něm uchovává stav procesu (registry, PID, paměť, soubory)</li><li><b>TCB (Thread Control Block)</b> – obdoba pro vlákno</li></ul><b>Přepnutí kontextu (context switch)</b>: uloží registry, <b>vymění stránkovací tabulku</b>, <b>vyprázdní TLB</b> a cache → proto je <b>drahé</b>. Přepnutí vláken téhož procesu je levnější (jen registry)." },
+
+  { t: "os",
+    q: "Jaké jsou stavy procesu?",
+    a: "<ul><li><b>Nový (new)</b> – právě vytvořen</li><li><b>Připravený (ready)</b> – čeká na přidělení CPU</li><li><b>Běžící (running)</b> – zpracováván procesorem</li><li><b>Čekající (waiting/blocked)</b> – čeká na událost (I/O)</li><li><b>Ukončený (terminated)</b></li></ul>Se střednědobým plánovačem přibývají <b>odložené (swapped out)</b> stavy." },
+
+  { t: "os",
+    q: "Jak se virtuální adresa dělí na číslo stránky a offset?",
+    a: "<b>Stránka má velikost 2ⁿ bajtů → spodních n bitů adresy je OFFSET, zbytek číslo stránky.</b><ul><li><b>Offset se při překladu jen opíše</b> z virtuální do fyzické adresy (stránka i rámec jsou zarovnané na 2ⁿ)</li><li>Příklad: stránka 4 KiB = 2¹² → 12 bitů offset, zbytek mapuje MMU</li><li>Vícestupňové tabulky: 32bit adresa → 10+10 bitů (2 úrovně) + 12 offset</li></ul>" },
+
+  { t: "os",
+    q: "Co je externí stránkování, líné načítání a mapování souborů?",
+    a: "<b>Externí stránkování – mapování virtuálních adres na diskové úložiště (swap).</b><ul><li><b>Líné načítání</b> – do RAM se kopírují jen části programu, které jsou právě potřeba</li><li><b>Mapování souborů (mmap)</b> – soubor se tváří jako paměť, čtení/zápis jsou přístupy do paměti</li><li><b>Page fault</b> – přístup ke stránce, která není v RAM → načtení z disku</li></ul>" },
+
+  { t: "os",
+    q: "Co je spin-lock, CAS a Petersonův algoritmus?",
+    a: "<ul><li><b>Spin-lock</b> – aktivní čekání ve smyčce (busy-wait); vytěžuje CPU → řeší se uspáváním mezi pokusy</li><li><b>CAS (compare-and-swap)</b> – atomická operace: přečte hodnotu a změní ji jen pokud odpovídá očekávané (základ lock-free)</li><li><b>Petersonův algoritmus</b> – softwarové vzájemné vyloučení pro 2 vlákna; vyžaduje atomické zápisy</li></ul>Kritickou sekci chrání zámek (bitová proměnná) přes atomické operace." },
+
+  { t: "os",
+    q: "Jaký je rozdíl mezi hladověním, uváznutím a livelockem?",
+    a: "<ul><li><b>Hladovění (starvation)</b> – vlákno je připravené, ale plánovač mu trvale odpírá zdroj (nespravedlivost)</li><li><b>Uváznutí (deadlock)</b> – vlákna se vzájemně blokují (cyklus čekání), nikdo nepokročí</li><li><b>Livelock</b> – vlákna reagují na sebe a mění stav, ale <b>nepostupují</b> (např. oba neustále ustupují)</li></ul>Vláknová afinita = snaha držet vlákno na stejném jádře (kvůli cache)." }
 );

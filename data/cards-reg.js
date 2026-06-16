@@ -72,5 +72,57 @@ FC.cards.push(
 
   { t: "reg",
     q: "Co je paralelní (synchronní) kompozice automatů?",
-    a: "<b>Konstrukce produktového automatu, který simuluje dva automaty zároveň.</b><ul><li>Stavy = <b>dvojice (p, q)</b> stavů obou automatů</li><li>Na vstupní symbol oba automaty udělají přechod <b>synchronně</b></li><li>Volbou přijímajících stavů získáme <b>průnik</b> (oba přijímají) nebo <b>sjednocení</b> (aspoň jeden) jazyků</li></ul>Je to základ důkazu uzávěrových vlastností na průnik a rozdíl." }
+    a: "<b>Konstrukce produktového automatu, který simuluje dva automaty zároveň.</b><ul><li>Stavy = <b>dvojice (p, q)</b> stavů obou automatů</li><li>Na vstupní symbol oba automaty udělají přechod <b>synchronně</b></li><li>Volbou přijímajících stavů získáme <b>průnik</b> (oba přijímají) nebo <b>sjednocení</b> (aspoň jeden) jazyků</li></ul>Je to základ důkazu uzávěrových vlastností na průnik a rozdíl." },
+
+  { t: "reg",
+    q: "Co je abeceda, slovo, prefix/sufix a prázdné slovo?",
+    a: "<ul><li><b>Abeceda Σ</b> – konečná množina symbolů (ε do ní nepatří)</li><li><b>Slovo</b> – konečná posloupnost symbolů; každé slovo je svým prefixem, sufixem i podslovem</li><li><b>Prázdné slovo ε</b> – prefix/sufix/podslovo každého slova; len(ε)=0</li><li><b>Σ*</b> – všechna slova nad Σ</li></ul>Jazyk = libovolná podmnožina Σ*; slovo je <b>akceptováno</b>, dovede-li automat z počátečního do koncového stavu." },
+
+  { t: "reg",
+    q: "Jaké jsou tvary pravidel jednotlivých typů Chomského hierarchie?",
+    a: "<ul><li><b>Typ 0 (frázové)</b> – neomezený tvar, jen neterminál nalevo</li><li><b>Typ 1 (kontextové)</b> – αAβ → αγβ, |levá| ≤ |pravá|</li><li><b>Typ 2 (bezkontextové)</b> – A → γ (jeden neterminál nalevo)</li><li><b>Typ 3 (regulární)</b> – A → a nebo A → aB</li></ul>Vnoření: typ 3 ⊂ typ 2 ⊂ typ 1 ⊂ typ 0." },
+
+  { t: "reg",
+    q: "Jaký je rozdíl mezi pravolineární a levolineární regulární gramatikou?",
+    a: "<ul><li><b>Pravolineární</b> – pravá strana ve tvaru <b>aB</b> (terminál + neterminál vpravo)</li><li><b>Levolineární</b> – pravá strana ve tvaru <b>Ba</b></li></ul>Obě generují regulární jazyky, ale <b>nesmí se kombinovat</b> v jedné gramatice. Pravidlo S → ε je povoleno, jen pokud se S nevyskytuje na pravé straně." },
+
+  { t: "reg",
+    q: "Proč mají DFA a NFA stejnou sílu a jaký je nárůst stavů při determinizaci?",
+    a: "<ul><li>Každý NFA lze převést na DFA <b>podmnožinovou konstrukcí</b> → oba rozpoznávají regulární jazyky</li><li>Stavy DFA = <b>množiny stavů NFA</b>, proto v nejhorším případě <b>exponenciální nárůst</b> (až 2ⁿ stavů)</li></ul>NFA tedy nepřidává sílu, jen úspornost zápisu." },
+
+  { t: "reg",
+    q: "Jak se odstraní ε-kroky a jak funguje ε-okolí?",
+    a: "<ul><li><b>ε-okolí</b> stavu = množina stavů dosažitelných čistě ε-přechody</li><li>Postup: spočítej, kam dojdeš ε-kroky → udělej normální přechod → znovu ε-uzávěr</li><li>Pokud je v ε-okolí počátečního stavu koncový stav, počáteční stav se stane koncovým</li></ul>ε-NFA, NFA i DFA rozpoznávají stejnou třídu (regulární jazyky)." },
+
+  { t: "reg",
+    q: "Co je rozlišitelnost stavů a jak se automat minimalizuje?",
+    a: "<b>Dva stavy jsou rozlišitelné slovem w, pokud z nich w vede tak, že právě jeden skončí v koncovém stavu.</b> Nerozlišitelné = <b>ekvivalentní</b>.<ul><li><b>Algoritmus</b>: odstraň nedosažitelné stavy → rozděl na koncové/nekoncové → iterativně zjemňuj třídy podle přechodů → slučuj nerozlišitelné</li></ul>Pro každý regulární jazyk existuje <b>jediný minimální DFA</b>. Minimalizace je v <b>polynomiálním</b> čase." },
+
+  { t: "reg",
+    q: "Co je kanonický tvar automatu a jak se testuje ekvivalence dvou automatů?",
+    a: "<b>Kanonizace = minimální DFA s pevně daným (kanonickým) přečíslováním stavů</b> podle pořadí průchodu.<ul><li>Celý řetězec: ε-NFA → (odstranění ε) NFA → (determinizace) DFA → (minimalizace) min. DFA → (kanonizace) kanonický DFA</li><li><b>Test ekvivalence</b>: oba automaty zkanonizuj – L(A₁)=L(A₂) ⟺ jsou to <b>totožné</b> automaty</li></ul>" },
+
+  { t: "reg",
+    q: "Co říká Kleeneho věta a jaké jsou základní regulární výrazy?",
+    a: "<b>Kleeneho věta: regulární výraz má stejnou vyjadřovací sílu jako konečný automat.</b><ul><li>Atomické: <b>∅, ε, a</b> (každý symbol je regex)</li><li>Operace: <b>sjednocení (+), zřetězení (.), Kleeneho hvězda (*)</b></li><li>Příklad: <code>(0|1).0*.1</code> = symbol, pak nuly, pak 1</li></ul>Využití: grep. RE i automaty popisují tutéž třídu (regulární jazyky)." },
+
+  { t: "reg",
+    q: "Jaký je rozdíl mezi L* (Kleeneho hvězda) a L⁺ (pozitivní iterace)?",
+    a: "<ul><li><b>L*</b> – nula a více zřetězení, <b>vždy obsahuje ε</b> (L⁰ = {ε})</li><li><b>L⁺</b> – jedna a více zřetězení; <b>obsahuje ε jen tehdy, pokud ε ∈ L</b></li></ul>Obecně NEplatí L⁺ = L* − {ε}; rovnost platí jen když L neobsahuje ε." },
+
+  { t: "reg",
+    q: "Jak se převede automat na regulární výraz (GNFA, eliminace stavů)?",
+    a: "<b>Pracuje se se zobecněným NFA (GNFA), kde hrany nesou celé regulární výrazy.</b><ol><li>Přidej nový počáteční a koncový stav (ε-přechody)</li><li>Postupně <b>odstraňuj mezilehlé stavy</b> a přechody nahrazuj regexy</li></ol>Pravidla: cestu E → F(smyčka) → G nahradíš <b>E·F*·G</b>; paralelní hrany E₁,…,Eₖ sloučíš do <b>(E₁+…+Eₖ)</b>." },
+
+  { t: "reg",
+    q: "Jak se sestrojí doplněk regulárního jazyka/výrazu?",
+    a: "<b>Postup: regex → NFA → DFA (s totální přechodovou funkcí vč. chybového stavu) → prohození koncových a nekoncových stavů → zpět na regex.</b><ul><li><b>Klíčové</b>: DFA musí mít <b>totální</b> přechodovou funkci, jinak prohození stavů nedá správný doplněk</li></ul>" },
+
+  { t: "reg",
+    q: "CHYTÁK: Popisují DFA s jedním koncovým stavem všechny regulární jazyky?",
+    a: "<b>NE pro DFA, ANO pro ε-NFA.</b><ul><li><b>ε-NFA s jedním koncovým stavem</b> – popisuje celou třídu regulárních jazyků (přidáme ε-přechody do jednoho koncového)</li><li><b>DFA s jedním koncovým stavem</b> – omezení, NEpopisuje všechny regulární jazyky</li></ul>DFA a NFA mají jinak stejnou sílu; minimalizace je polynomiální, determinizace až exponenciální." },
+
+  { t: "reg",
+    q: "CHYTÁK: Na co regulární jazyky NEjsou uzavřeny a co znamená uzavřenost?",
+    a: "<ul><li><b>Uzavřenost</b> = <b>konečným počtem</b> operací na jazycích z třídy nevyrobím jazyk mimo třídu (pozor: jen konečným, ne nekonečným!)</li><li>Regulární jazyky <b>jsou</b> uzavřeny na sjednocení, průnik, doplněk, rozdíl, zřetězení, iteraci, reverzi</li><li><b>NEjsou</b> uzavřeny na <b>průnik s nekonečným (neregulárním) jazykem</b></li></ul>" }
 );

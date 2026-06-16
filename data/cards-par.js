@@ -43,5 +43,69 @@ FC.cards.push(
 
   { t: "par",
     q: "Jaké jsou hlavní problémy a rizika paralelního programování?",
-    a: "<ul><li><b>Race condition</b> – výsledek závisí na časování přístupů ke sdíleným datům</li><li><b>Deadlock</b> – vlákna se vzájemně blokují (čekání na zdroje v cyklu)</li><li><b>Starvation</b> – vlákno se nikdy nedostane ke zdroji</li><li><b>False sharing</b> – vlákna píší do různých proměnných ve stejné cache-line → zbytečná invalidace</li><li><b>Režie synchronizace a komunikace</b> snižuje zrychlení</li></ul>" }
+    a: "<ul><li><b>Race condition</b> – výsledek závisí na časování přístupů ke sdíleným datům</li><li><b>Deadlock</b> – vlákna se vzájemně blokují (čekání na zdroje v cyklu)</li><li><b>Starvation</b> – vlákno se nikdy nedostane ke zdroji</li><li><b>False sharing</b> – vlákna píší do různých proměnných ve stejné cache-line → zbytečná invalidace</li><li><b>Režie synchronizace a komunikace</b> snižuje zrychlení</li></ul>" },
+
+  { t: "par",
+    q: "Co je Flynnova klasifikace?",
+    a: "<b>Dělení paralelních architektur podle instrukcí a dat:</b><ul><li><b>SISD</b> – Single Instruction Single Data: sekvenční výpočty</li><li><b>SIMD</b> – Single Instruction Multiple Data: vektorové instrukce, <b>GPU</b></li><li><b>MIMD</b> – Multiple Instruction Multiple Data: <b>vícejádrové procesory</b></li><li><b>MISD</b> – nepoužívá se</li></ul>" },
+
+  { t: "par",
+    q: "Co je cache koherence a false sharing (jak se řeší)?",
+    a: "<ul><li><b>Koherence</b> – vždy musí existovat jediná platná hodnota pro místo v paměti sdílené více jádry</li><li><b>False sharing</b> – dvě vlákna mění různé proměnné ve <b>stejné cache line</b>; úprava jednou stranou donutí druhou znovu nahrát celou cache line (zbytečné zpomalení)</li></ul>Řešení: <b>padding</b> (odsadit data na různé cache lines), atomické operace (CAS)." },
+
+  { t: "par",
+    q: "K čemu slouží klíčové slovo volatile a co je thread-safe vs reentrantní?",
+    a: "<ul><li><b>volatile</b> – hodnota se může nečekaně měnit (jiné vlákno, I/O port, přerušení); vynucuje čtení/zápis do paměti místo registru. <b>Negarantuje pořadí</b> → stále nutná synchronizační primitiva.</li><li><b>Thread-safe</b> – proceduru lze bezpečně volat z více vláken bez synchronizace</li><li><b>Reentrantní</b> – lze ji kdykoli přerušit a spustit znovu na jiném vlákně</li></ul>" },
+
+  { t: "par",
+    q: "Co je graf závislostí, kritická cesta a granularita?",
+    a: "<ul><li><b>Graf závislostí</b> – částečné uspořádání úloh; úloha je připravena, když jsou hotové její závislosti (topologické uspořádání)</li><li><b>Kritická cesta</b> – cesta grafem s maximální prací (limituje minimální dobu)</li><li><b>Granularita</b>: <b>jemnozrnná</b> (mnoho malých úloh) vs <b>hrubozrnná</b> (větší úlohy, menší režie)</li></ul>Stupeň souběžnosti = max počet souběžných úloh." },
+
+  { t: "par",
+    q: "Jaké jsou specializované techniky dekompozice (průzkumová, spekulativní, MAP-REDUCE)?",
+    a: "<ul><li><b>Průzkumová</b> – pro prohledávání; každé vlákno jiný směr, po nalezení všechna zastaví (může dát <b>superlineární zrychlení</b>)</li><li><b>Spekulativní</b> – spustí čekající úlohu nad všemi možnými výsledky předchozí (web search)</li><li><b>Hybridní / MAP-REDUCE</b> – rozděl a panuj napříč počítači; hledání minima O(n) → O(log p) při p procesorech</li></ul>" },
+
+  { t: "par",
+    q: "Jaké jsou strategie mapování úloh na vlákna (statické vs dynamické)?",
+    a: "<ul><li><b>Statické</b> (v době kompilace) – blokové (data po blocích), <b>cyklické</b> (rovnoměrnější zátěž), blokově-cyklické; menší režie</li><li><b>Dynamické</b> (za běhu) – flexibilní, vyrovnává zátěž; <b>samo-plánování</b> (vlákno si vezme další úlohu), <b>afinitní plánování</b> (úlohy cestují levně, drží se na jádrech sdílejících cache)</li></ul>Cíl: rovnoměrná zátěž, menší režie, max souběžnost." },
+
+  { t: "par",
+    q: "Jaká je cena komunikace a typy komunikace (blokující, bafrované)?",
+    a: "<b>Cena: T = tₛ + m·t_w</b> (latence + objem × cena za jednotku).<ul><li><b>Blokující</b> – proces čeká na dokončení (pošťák čeká před domem); <b>neblokující</b> – běží dál (balík u dveří)</li><li><b>Bafrované</b> – do bufferu (poštovní schránka), nevyžaduje souhru; <b>nebafrované</b> – příjemce musí být přítomen (balík do ruky)</li></ul><b>Embarrassingly parallel</b> – úlohy tak malé, že nepotřebují režii (ray casting)." },
+
+  { t: "par",
+    q: "Jaké jsou topologie komunikačních kanálů a kolektivní operace?",
+    a: "<b>Topologie:</b> prsten, hvězda (Master-Slave, úzké hrdlo), <b>hyperkostka</b> (log₂n rozměrů), strom.<ul><li><b>One-to-all</b> – Broadcast, Scatter (každý posílá svou část) – přes <b>rekurzivní zdvojení</b> (počet uzlů se zdvojuje)</li><li><b>All-to-one</b> – Gather, <b>Reduce</b> (kombinace přes +, ×, AND…)</li><li><b>All-to-all</b> – E-cube routing na hyperkostkách</li></ul>" },
+
+  { t: "par",
+    q: "Co je CAS, ABA problém a hazardní ukazatele?",
+    a: "<b>CAS (Compare-And-Swap)</b> – atomicky: pokud *addr == exp, nahraď val (vrátí true/false). Základ lock-free.<ul><li><b>ABA problém</b> – hodnota se změní A→B→A, CAS si myslí, že se nezměnila → workaround: <b>tag/timestamp</b></li><li><b>Hazardní ukazatele</b> – řeší lock-free dealokaci bez GC; vlákna zveřejňují seznam používaných ukazatelů (čítač 0 → lze dealokovat)</li></ul>" },
+
+  { t: "par",
+    q: "Jaký je rozdíl mezi lock-free a wait-free, a co je WRRM?",
+    a: "<ul><li><b>Lock-free</b> – při souběhu vždy <b>aspoň jedno</b> vlákno dokončí (žádné uváznutí)</li><li><b>Wait-free</b> – silnější: <b>každé</b> vlákno dokončí v omezeném čase</li></ul><b>WRRM (Write-Rarely-Read-Many)</b> – čtenáři vs písaři; při málo zápisech povolí souběžné čtení. Zápis vytvoří kopii a CAS přepne ukazatel (potřebuje GC / hazardní ukazatele). Použití: tabulka kurzů." },
+
+  { t: "par",
+    q: "Jak se v POSIX Threads používají podmínkové proměnné?",
+    a: "<b>Řeší aktivní čekání spin-locku a režii uspávání.</b><ol><li>Vlákno získá mutex, zkontroluje podmínku</li><li>Je-li false → <code>pthread_cond_wait()</code> (uvolní mutex a čeká)</li><li>Jiné vlákno změní podmínku a <code>pthread_cond_signal()</code></li><li>Probuzené vlákno znovu získá mutex a zkontroluje podmínku</li></ol><code>pthread_cond_broadcast()</code> probudí všechna čekající vlákna (O(n))." },
+
+  { t: "par",
+    q: "Jaké jsou hlavní OpenMP direktivy?",
+    a: "<b>OpenMP – paralelizace přes pragma direktivy (překladač), přepínač -fopenmp.</b><ul><li><b>parallel</b> – blok běží paralelně (počet vláken OMP_NUM_THREADS, proměnné private/shared)</li><li><b>for</b> – paralelní cyklus (jen v parallel; ordered vynutí pořadí)</li><li><b>single</b> – jen jedno vlákno; <b>sections</b> – podbloky paralelně</li><li><b>reduce</b> – redukce skalárních výsledků; <b>critical/atomic/flush</b></li></ul>" },
+
+  { t: "par",
+    q: "Jaké jsou základní funkce MPI?",
+    a: "<b>MPI – komunikace zprávami v distribuované paměti, abstrahuje typy přes Datatype.</b><ul><li><b>MPI_Init / MPI_Finalize</b></li><li><b>MPI_COMM_WORLD</b> – skupina všech procesů; <b>MPI_Comm_rank</b> (ID), <b>MPI_Comm_size</b> (počet)</li><li><b>MPI_Send / MPI_Recv</b> (point-to-point), neblokující <b>Isend/Irecv</b></li><li>Kolektivní: <b>MPI_Bcast</b> (rozeslání), <b>MPI_Reduce</b> (sběr + operace)</li></ul>" },
+
+  { t: "par",
+    q: "Jak se počítá zrychlení, efektivita a režie?",
+    a: "<ul><li><b>Zrychlení S = Tₛ / Tₚ</b> (Tₛ = čas <b>nejlepšího sekvenčního</b> algoritmu, NE paralelního na 1 jádře!)</li><li><b>Efektivita E = S / p = Tₛ / (p·Tₚ)</b> – podíl času věnovaný algoritmu, ne režii</li><li><b>Režie T_o = p·Tₚ − Tₛ</b></li><li><b>Cena C = p·Tₚ</b></li></ul>S použitím p zdrojů <b>nedosáhneme p-násobného</b> zrychlení (kvůli neparalelizovatelné části a režii)." },
+
+  { t: "par",
+    q: "Jaký je vzorec Amdahlova zákona a co je superlineární zrychlení?",
+    a: "<b>S_max = 1 / ((1−p) + p/Sₚ)</b>, kde p = paralelizovatelný podíl, Sₚ = zrychlení paralelní části.<ul><li>Příklad: p=0,3, Sₚ=4 → S = 1/(0,7 + 0,075) = <b>1,29</b> (129 %)</li><li>Při p→∞ je strop <b>1/(1−p)</b></li></ul><b>Superlineární zrychlení</b> (&gt; p×) – buď falešné (špatný sekvenční referent), nebo skutečné (víc vláken = víc cache, průzkumová dekompozice)." },
+
+  { t: "par",
+    q: "Co je škálovatelnost a izoefektivní funkce?",
+    a: "<ul><li><b>Škálovatelnost</b> – míra zachování efektivity při růstu počtu jader i vstupu (testovat na reálných datech)</li><li><b>Izoefektivní funkce</b>: Tₛ = K · T_o(W, p) – jak rychle musí růst objem práce W, aby se udržela efektivita při přidávání vláken</li></ul>Čím pomalejší růst (O(p log p) lepší než O(p²)), tím lepší škálování. K = E/(1−E)." }
 );

@@ -60,5 +60,61 @@ FC.cards.push(
 
   { t: "cmp",
     q: "Jak se dokazuje korektnost a složitost řadicích algoritmů (invariant cyklu)?",
-    a: "<ul><li><b>Korektnost přes invariant cyklu</b>: tvrzení platné před každou iterací. Dokáže se <b>inicializace</b> (platí na začátku), <b>zachování</b> (iterace ho udrží), <b>ukončení</b> (po skončení dává správnost). Příklad: u select sortu je invariant „prvních i prvků je seřazeno a jsou nejmenší\".</li><li><b>Složitost</b>: select sort O(n²), merge sort O(n log n), <b>quicksort</b> průměrně O(n log n), nejhůř O(n²)</li></ul>" }
+    a: "<ul><li><b>Korektnost přes invariant cyklu</b>: tvrzení platné před každou iterací. Dokáže se <b>inicializace</b> (platí na začátku), <b>zachování</b> (iterace ho udrží), <b>ukončení</b> (po skončení dává správnost). Příklad: u select sortu je invariant „prvních i prvků je seřazeno a jsou nejmenší\".</li><li><b>Složitost</b>: select sort O(n²), merge sort O(n log n), <b>quicksort</b> průměrně O(n log n), nejhůř O(n²)</li></ul>" },
+
+  { t: "cmp",
+    q: "Co je polynomiální a co exponenciální algoritmus a proč je hranice efektivity?",
+    a: "<ul><li><b>Polynomiální</b>: Time(n) ∈ O(nᵏ) pro konstantu k → považován za <b>efektivní</b></li><li><b>Exponenciální</b>: Time(n) ∈ O(2^(nᵏ)) → v praxi nepoužitelný pro velká n</li></ul>Hranice „efektivní = polynomiální\" je teoretická konvence (i n¹⁰⁰ je polynom). Asymptoticky: O(nᵏ) &lt; O(kⁿ)." },
+
+  { t: "cmp",
+    q: "Jak jsou definovány třídy P, NP, EXP, PSPACE a EXPSPACE?",
+    a: "<b>Časové třídy:</b><ul><li><b>P</b> – řešitelné v polynomiálním čase na <b>deterministickém</b> TS</li><li><b>NP</b> – v polynomiálním čase na <b>nedeterministickém</b> TS</li><li><b>EXP</b> – v exponenciálním čase</li></ul><b>Prostorové třídy:</b><ul><li><b>PSPACE</b> – polynomiální paměť</li><li><b>EXPSPACE</b> – exponenciální paměť</li></ul>" },
+
+  { t: "cmp",
+    q: "Jaké jsou inkluze mezi P, NP, PSPACE a EXPTIME?",
+    a: "<b>P ⊆ NP ⊆ PSPACE ⊆ EXPTIME ⊆ EXPSPACE</b><ul><li>P ⊆ NP – P je speciální případ NP</li><li>NP ⊆ PSPACE – nedeterministický polynomiální výpočet lze projít v polynomiální paměti</li><li>Jediné jisté <b>ostré</b> oddělení: P ⊊ EXPTIME a PSPACE ⊊ EXPSPACE</li></ul>P vs NP i NP vs PSPACE zůstávají <b>otevřené</b>." },
+
+  { t: "cmp",
+    q: "Co je polynomiální redukce a její klíčový důsledek?",
+    a: "<b>f: Σ₁* → Σ₂* je polynomiální redukce L₁ ≤ₚ L₂, pokud:</b><ul><li>f se počítá <b>deterministickým TS v polynomiálním čase</b></li><li>w ∈ L₁ ⟺ f(w) ∈ L₂</li></ul><b>Důsledek</b>: pokud L₂ ∈ P a L₁ ≤ₚ L₂, pak i <b>L₁ ∈ P</b>. (Obyčejná redukce z rozhodnutelnosti nestačí – zanedbává čas.)" },
+
+  { t: "cmp",
+    q: "Jaké problémy patří do P a jaké do NP (ale nevíme zda do P)?",
+    a: "<ul><li><b>P</b>: řazení, nejkratší cesta (SSSP), minimální kostra, <b>NSD (Euklides)</b>, <b>prvočíselnost (AKS)</b></li><li><b>NP</b> (zatím bez známého P algoritmu): <b>faktorizace</b> (základ RSA!), <b>izomorfismus grafů</b>, SUBSET-SUM, SAT, celočíselné programování</li></ul>Bezpečnost RSA stojí na tom, že faktorizace <b>není známo, že by byla v P</b>." },
+
+  { t: "cmp",
+    q: "Jaké jsou klasické NP-úplné problémy?",
+    a: "<ul><li><b>SAT / 3-SAT</b> – splnitelnost booleovské formule (Cook–Levin)</li><li><b>CLIQUE</b> – existuje klika velikosti ≥ k?</li><li><b>VERTEX-COVER</b> – vrcholové pokrytí velikosti ≤ k?</li><li><b>SUBSET-SUM</b> – podmnožina se součtem t?</li><li><b>TSP</b> (rozhodovací), <b>problém batohu</b>, barvení grafu</li></ul>Všechny jsou navzájem polynomiálně redukovatelné." },
+
+  { t: "cmp",
+    q: "Co je TQBF a proč je kanonický PSPACE-úplný problém?",
+    a: "<b>TQBF (True Quantified Boolean Formula)</b> – je pravdivá plně kvantifikovaná booleovská formule (každá proměnná svázaná ∀ nebo ∃)?<ul><li>Zobecnění SATu (u SATu jsou všechny proměnné jen ∃)</li><li><b>Kanonický PSPACE-úplný</b> problém (jako SAT pro NP)</li><li>Modeluje <b>hry dvou hráčů</b> (šachy, dáma) – „existuje můj tah, že pro každý tah soupeře…\"</li></ul>" },
+
+  { t: "cmp",
+    q: "CHYTÁK: Co plyne o složitosti problému z algoritmu se složitostí O(f(n))?",
+    a: "<b>Že složitost problému je NEJVÝŠE O(f(n))</b> (algoritmus dává <b>horní mez</b>).<ul><li>Pro důkaz Θ(f(n)) musíme navíc dokázat <b>dolní mez</b> – že neexistuje algoritmus v o(f(n))</li><li>Má-li problém lineární složitost, <b>může</b> existovat i pomalejší algoritmus O(n²), který ho řeší (jen není optimální)</li></ul>" },
+
+  { t: "cmp",
+    q: "CHYTÁK: Může exponenciální problém patřit do PSPACE? Patří TQBF do NP?",
+    a: "<ul><li>Problém s <b>exponenciální časovou</b> složitostí <b>může</b> patřit do <b>PSPACE</b> (např. prochází exponenciálně mnoho možností, ale opakovaně používá málo paměti)</li><li><b>TQBF NEpatří (zřejmě) do NP</b> – je PSPACE-úplný; je „nad\" NP</li></ul>Platí L ≤ₚ SAT ⟹ L ≤ₚ TQBF (protože SAT ≤ₚ TQBF); a L ∈ P ⟹ L ≤ₚ SAT." },
+
+  { t: "cmp",
+    q: "CHYTÁK: Jak přesně se dokazuje NP-těžkost problému A?",
+    a: "<b>Polynomiální redukcí z NĚJAKÉHO známého NP-těžkého problému NA A</b> (směr: známý těžký ≤ₚ A).<ul><li>NE naopak (A ≤ₚ něco z NP by neukázalo těžkost)</li><li>Pro <b>NP-úplnost</b> navíc ukázat A ∈ NP (certifikát + polynomiální verifikace)</li></ul>Připomínka definic: <b>NP-těžký</b> = každý problém z NP se na něj redukuje; <b>NP-úplný</b> = NP-těžký a zároveň v NP." },
+
+  { t: "cmp",
+    q: "Jaký je rozdíl mezi časovou a prostorovou složitostí a jak se měří?",
+    a: "<ul><li><b>Časová složitost</b> – počet kroků v závislosti na velikosti vstupu (worst/avg/best case)</li><li><b>Prostorová složitost</b> – maximální velikost použité paměti</li></ul>Prostorová se zkoumá na TS se <b>dvěma páskami</b> (read-only vstup + read-write pracovní), aby se nepočítal vstup. <b>In situ</b> = konstantní extra paměť." },
+
+  { t: "cmp",
+    q: "Co je certifikát a verifikátor u NP problému?",
+    a: "<b>K pozitivním instancím NP problému existuje polynomiálně ověřitelný certifikát (svědek).</b><ul><li>Příklad SUBSET-SUM: certifikát = konkrétní podmnožina; ověření = sečíst a porovnat s t (lineárně)</li><li>Příklad SAT: certifikát = ohodnocení proměnných; ověření = dosadit</li></ul><b>NP = problémy s polynomiálním verifikátorem.</b> Nalezení certifikátu je těžké, ověření snadné." },
+
+  { t: "cmp",
+    q: "Jak NedeterminisTický TS souvisí s třídou NP?",
+    a: "<b>NP = problémy řešitelné v polynomiálním čase na NEdeterministickém TS.</b><ul><li>NTS „uhodne\" správnou větev výpočtu (Oracle) a ověří ji v polynomiálním čase</li><li>Simulace NTS deterministickým TS prochází <b>všechny větve</b> → exponenciální zpomalení</li></ul>Proto P ⊆ NP ⊆ EXPTIME; otázka P = NP zůstává otevřená." },
+
+  { t: "cmp",
+    q: "PŘÍKLAD: Patří regulární jazyky a třídění do P?",
+    a: "<ul><li><b>Regulární jazyky</b> – rozpoznání slova DFA je <b>lineární</b> → v P (a tedy i v PSPACE)</li><li><b>Třídění, nejkratší cesta, prvočíselnost (AKS)</b> – v P</li><li><b>Faktorizace</b> – v NP, ale není známo, zda v P (základ RSA)</li></ul>CHYTÁK: má-li problém lineární složitost, stále <b>může</b> existovat i pomalejší (O(n²)) algoritmus, který ho řeší." }
 );

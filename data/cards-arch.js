@@ -92,5 +92,57 @@ FC.cards.push(
 
   { t: "arch",
     q: "Co je polosčítačka a úplná sčítačka?",
-    a: "<ul><li><b>Polosčítačka (half adder)</b> – sečte 2 bity, výstupy <b>součet S = A⊕B</b> (XOR) a <b>přenos C = A·B</b> (AND). Neumí započítat přenos zdola.</li><li><b>Úplná sčítačka (full adder)</b> – sečte 3 bity (A, B, přenos Cᵢₙ), dává součet a přenos. Řetězením úplných sčítaček vznikne <b>vícebitová sčítačka</b>.</li></ul>" }
+    a: "<ul><li><b>Polosčítačka (half adder)</b> – sečte 2 bity, výstupy <b>součet S = A⊕B</b> (XOR) a <b>přenos C = A·B</b> (AND). Neumí započítat přenos zdola.</li><li><b>Úplná sčítačka (full adder)</b> – sečte 3 bity (A, B, přenos Cᵢₙ), dává součet a přenos. Řetězením úplných sčítaček vznikne <b>vícebitová sčítačka</b>.</li></ul>" },
+
+  { t: "arch",
+    q: "Jak se rychle převádí mezi binární, osmičkovou a šestnáctkovou soustavou?",
+    a: "<ul><li><b>BIN ↔ OCT</b>: 1 osmičková číslice = <b>3 bity</b></li><li><b>BIN ↔ HEX</b>: 1 hex číslice = <b>4 bity</b></li><li><b>OCT ↔ HEX</b>: přes binární (2 kroky)</li></ul>Příklad: 1101 1010₂ = DA₁₆ = 332₈. Poziční soustava: A = Σ aᵢ·zⁱ (z = základ)." },
+
+  { t: "arch",
+    q: "Porovnej přímý, inverzní, doplňkový a aditivní kód.",
+    a: "<ul><li><b>Přímý</b> – nejvyšší bit znaménko; <b>dvě nuly</b>, složitá aritmetika</li><li><b>Inverzní</b> – záporné = negace bitů; dvě nuly, při přenosu nutná <b>korekce +1</b></li><li><b>Doplňkový</b> – záporné = negace+1; <b>jediná nula</b>, asymetrický rozsah (−2ⁿ⁻¹..2ⁿ⁻¹−1), nejpoužívanější</li><li><b>Aditivní (s posunem/bias)</b> – přičítá konstantu, umožňuje <b>přímé porovnání</b> jako nezáporných; používá exponent v IEEE 754</li></ul>" },
+
+  { t: "arch",
+    q: "Jak přesně se uloží číslo do IEEE 754 (float)?",
+    a: "<b>F = ± mantisa · 2^exp; 1 bit znaménko + 8 bitů exponent + 23 bitů mantisa.</b><ul><li><b>Exponent</b> – aditivní kód (bias 127), <b>mantisa</b> – přímý kód, normalizovaná (vedoucí 1 se <b>neukládá</b>)</li></ul>Příklad 6,5 = 110,1₂ = 1,101·2² → znaménko 0, exponent 2+127=129=10000001, mantisa 1010…0." },
+
+  { t: "arch",
+    q: "Jaké jsou parametry Hammingova kódu (7,4)?",
+    a: "<b>Hammingův kód – paritní bity na pozicích mocnin 2, každý hlídá paritu podmnožiny bitů.</b><ul><li><b>(7,4)</b>: 4 datové + 3 paritní bity, <b>minimální Hammingova vzdálenost d = 3</b></li><li>Obecně: opraví ⌊(d−1)/2⌋ chyb, detekuje d−1 chyb → (7,4) <b>opraví 1 bit, detekuje 2</b></li><li><b>Rozšířený (8,4) = SECDED</b>: přidá celkovou paritu, d=4 (oprava 1, detekce 2)</li></ul>Syndrom udává, který bit je chybný." },
+
+  { t: "arch",
+    q: "Co je Booleova algebra a De Morganovy zákony?",
+    a: "<b>Algebra nad {0,1} s operacemi ∧ (AND), ∨ (OR), ¬ (NOT).</b> Klíčové zákony:<ul><li><b>De Morgan</b>: ¬(x∧y) = ¬x ∨ ¬y; ¬(x∨y) = ¬x ∧ ¬y</li><li>distributivita, absorpce (x ∨ (x∧y) = x), komplementarita (x ∧ ¬x = 0)</li></ul>Hradla: NOT, AND, OR, NAND, NOR, <b>XOR (Y = ¬A·B + A·¬B)</b>. Hradla nemají paměť (kombinační)." },
+
+  { t: "arch",
+    q: "Jaké jsou typy pamětí (RAM, ROM, EPROM, EEPROM, CAM)?",
+    a: "<ul><li><b>RAM/RWM</b> – čtení i zápis, <b>volatilní</b> (SRAM rychlá/cache, DRAM hustá/hlavní)</li><li><b>ROM</b> – jen čtení, nevolatilní (firmware)</li><li><b>EPROM</b> – mazatelná UV světlem; <b>EEPROM/Flash</b> – elektricky přepisovatelná</li><li><b>CAM (asociativní)</b> – přístup podle <b>obsahu/tagu</b>, ne adresy (cache, směrovače)</li></ul>Paměťová buňka DRAM = 1 tranzistor + 1 kondenzátor." },
+
+  { t: "arch",
+    q: "Co je endianita (little vs big endian)?",
+    a: "<b>Způsob uložení bajtů víceбajtového čísla v paměti.</b><ul><li><b>Little-endian</b> – nejméně významný bajt na <b>nejnižší adrese</b> (x86); výhoda: char a int na stejné adrese mají stejnou hodnotu</li><li><b>Big-endian</b> – nejvýznamnější bajt na nejnižší adrese (síťové pořadí)</li></ul>" },
+
+  { t: "arch",
+    q: "Jaké cachovací algoritmy a úrovně cache znáš?",
+    a: "<ul><li><b>L1</b> – vlastní na jádro, 1–3 cykly; <b>L2</b> – obvykle na jádro; <b>L3</b> – sdílená všemi jádry, MB</li></ul>Vyhazovací algoritmy:<ul><li><b>LRU</b> (Least Recently Used) – vyhodí nejdéle nepoužitá data</li><li><b>LFU</b> (Least Frequently Used) – vyhodí nejméně používaná</li></ul><b>Prefetch</b> – přednačtení dat dopředu." },
+
+  { t: "arch",
+    q: "Co jsou registry A a PC a co je strojový vs instrukční cyklus?",
+    a: "<ul><li><b>Registry</b> – nejrychlejší úložiště v CPU (velikost 1 slovo); <b>A</b> = střádač (accumulator), <b>PC</b> = čítač instrukcí (drží adresu další instrukce)</li><li><b>Strojový cyklus</b> – čas na čtení jednoho slova z paměti</li><li><b>Instrukční cyklus</b> – výběr + provedení instrukce</li></ul>Stav procesoru = aritmetické registry + PC + ukazatel zásobníku." },
+
+  { t: "arch",
+    q: "Co je zásobník volání (call stack) a jeho stack-frame?",
+    a: "<b>Souvislá oblast paměti uchovávající návratové adresy při zanoření do podprogramů.</b> Každý <b>stack-frame</b> obsahuje:<ul><li>lokální proměnné, návratovou adresu, parametry</li></ul><b>Stack Pointer</b> ukazuje na vrchol zásobníku, <b>Frame Pointer</b> na začátek aktuálního rámce. Instrukce PUSH/POP nemají kontrolu přetečení." },
+
+  { t: "arch",
+    q: "Jaké jsou typy přerušení a jak se noř (vnořují)?",
+    a: "<ul><li><b>Vnější (hardwarové)</b> – od I/O zařízení, <b>asynchronní</b>, přes řadič přerušení</li><li><b>Vnitřní (výjimky)</b> – vyvolá procesor (dělení nulou, výpadek stránky, porušení ochrany)</li><li><b>Softwarové</b> – instrukce, <b>synchronní</b>; používá se pro <b>systémová volání</b></li></ul>K přerušení dojde jen <b>mezi instrukcemi</b>; mohou se <b>nořit</b> (přerušení s vyšší prioritou přeruší obsluhu). Je to synchronizační prostředek." },
+
+  { t: "arch",
+    q: "Jak pipelining souvisí s RISC a jaký je rozdíl RISC vs CISC v instrukcích?",
+    a: "<b>Pipelining (zřetězení)</b> překrývá fáze instrukcí (Fetch, Decode, Execute, Memory, Write-back) jako pásová výroba → dokončí ~1 instrukci/takt (CPI≈1).<ul><li><b>RISC</b> má <b>pevnou délku a jednotný formát</b> instrukcí → zřetězení usnadňuje; práce s pamětí jen LOAD/STORE</li><li><b>CISC</b> – složité instrukce různé délky, instrukce může pracovat přímo s pamětí (ADD X,Y)</li></ul>RISC: víc kódu, jednodušší HW, víc registrů." },
+
+  { t: "arch",
+    q: "Co je DMA a offload přerušení?",
+    a: "<ul><li><b>DMA (Direct Memory Access)</b> – zařízení přistupuje do paměti <b>bez procesoru</b> (odlehčení CPU u von Neumanna)</li><li><b>Offload přerušení</b> – jednotka (např. síťová karta) mapovaná do paměti s vlastní výpočetní jednotkou zpracuje přerušení sama a zapíše výsledek do paměti, aby neobtěžovala procesor</li></ul>" }
 );

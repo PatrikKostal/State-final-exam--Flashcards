@@ -35,5 +35,85 @@ FC.cards.push(
 
   { t: "netsec",
     q: "Co je VPN a co je PGP?",
-    a: "<ul><li><b>VPN (Virtual Private Network)</b> – vytvoří <b>šifrovaný tunel</b> přes veřejný internet, takže vzdálený uzel vystupuje jako v lokální síti. Zajišťuje důvěrnost a integritu (často přes IPSec/WireGuard/OpenVPN).</li><li><b>PGP</b> – zabezpečení e-mailu hybridním šifrováním + digitální podpisy; využívá <b>web of trust</b> pro důvěru ve veřejné klíče</li></ul>" }
+    a: "<ul><li><b>VPN (Virtual Private Network)</b> – vytvoří <b>šifrovaný tunel</b> přes veřejný internet, takže vzdálený uzel vystupuje jako v lokální síti. Zajišťuje důvěrnost a integritu (často přes IPSec/WireGuard/OpenVPN).</li><li><b>PGP</b> – zabezpečení e-mailu hybridním šifrováním + digitální podpisy; využívá <b>web of trust</b> pro důvěru ve veřejné klíče</li></ul>" },
+
+  { t: "netsec",
+    q: "Jaké jsou typy P2P sítí a co je překryvová síť?",
+    a: "<b>P2P = překryvová (overlay) síť nad fyzickou infrastrukturou; peer je klient i poskytovatel zdrojů.</b><ul><li><b>Centralizované</b> – centrální server pro vyhledávání (špatně škáluje)</li><li><b>Decentralizované</b> – žádný server, odolné vůči single-point-of-failure</li><li><b>Hybridní</b> – někteří peeři jsou <b>super-peers</b></li></ul>Data: <b>nestrukturovaná</b> (každý drží své) vs <b>strukturovaná</b> (DHT – distribuovaná hašovací tabulka)." },
+
+  { t: "netsec",
+    q: "Jak funguje HTTP a co obsahuje URL?",
+    a: "<ul><li><b>HTTP</b> – přístup k datům na WWW, přenáší HTML (rozšíření <b>MIME</b> pro soubory/média), přes <b>TCP port 80</b> (request-response)</li><li><b>URL</b>: <code>method://host:port/path</code></li></ul>WWW dokumenty: <b>statické</b> (pevný HTML), <b>dynamické</b> (generované, CGI), <b>aktivní</b> (běží na klientovi). HTTPS = HTTP přes TLS." },
+
+  { t: "netsec",
+    q: "Jak je strukturovaný DNS a jak probíhá vyhodnocení dotazu?",
+    a: "<b>Hierarchický jmenný prostor (invertovaný strom rozdělený do zón).</b><ul><li><b>Root zóna</b> = 13 serverů; pod ní TLD (.cz, .com), pak domény 2. řádu</li><li>Každou zónu spravuje jiný server (autoritativní)</li></ul>Vyhodnocení <code>cs.ucla.edu</code>: dotaz jde <b>root → TLD (edu) → autoritativní (ucla.edu)</b> → finální IP. Výsledky se cachují (TTL), běží přes UDP port 53." },
+
+  { t: "netsec",
+    q: "Jak funguje e-mail (MUA, MSA, MTA, MDA)?",
+    a: "<ol><li><b>MUA (Mail User Agent)</b> = klient → předá zprávu přes <b>SMTP</b> (port 25) lokálnímu serveru (MSA)</li><li><b>MTA (Mail Transfer Agent)</b> doručí SMTP zprávu cílovému mailserveru</li><li><b>MDA (Mail Delivery Agent)</b> spravuje schránky; příjemce čte přes <b>POP3/IMAP</b></li></ol>E-mail = obálka (adresy) + zpráva; adresa <code>local@domain</code>." },
+
+  { t: "netsec",
+    q: "Jaký je rozdíl mezi POP3 a IMAP?",
+    a: "<table><tr><td><b>POP3</b></td><td><b>IMAP</b></td></tr><tr><td>1 klient</td><td>více klientů</td></tr><tr><td>offline</td><td>vyžaduje připojení</td></tr><tr><td>stáhne lokálně</td><td>nechá na serveru (cache)</td></tr><tr><td>maže ze serveru</td><td>pamatuje stav (přečteno…)</td></tr></table>" },
+
+  { t: "netsec",
+    q: "Jaké jsou typy QoS a jak se plánuje fronta (scheduling)?",
+    a: "<ul><li><b>Best-effort</b> – bez QoS (IP)</li><li><b>Differentiated Services</b> – pakety značeny do tříd, bezstavové</li><li><b>Integrated Services</b> – rezervace zdrojů po cestě, stavové (hůře škáluje)</li></ul>Scheduling: <b>FIFO</b>, <b>Priority Queuing</b> (podle tříd), <b>Weighted Fair Queuing</b> (časová okna podle vah, round-robin)." },
+
+  { t: "netsec",
+    q: "Jak fungují Leaky Bucket, Token Bucket a RED/WRED?",
+    a: "<ul><li><b>Leaky Bucket</b> – vyhladí tok na <b>konstantní</b> rychlost (děravý kýbl), bursty zahazuje</li><li><b>Token Bucket</b> – hromadí tokeny při nečinnosti → povolí <b>omezené bursty</b></li><li><b>RED</b> – při zaplňování fronty náhodně zahazuje pakety (předchází globální synchronizaci); <b>WRED</b> zohledňuje prioritu paketu</li></ul>" },
+
+  { t: "netsec",
+    q: "Co je vzorkování a kvantování při zpracování multimédií?",
+    a: "<ul><li><b>Vzorkování (sampling)</b> – osa X (čas): v diskrétních intervalech se odečte hodnota spojitého signálu</li><li><b>Kvantování</b> – osa Y (hodnota): naměřená hodnota se zaokrouhlí na nejbližší povolenou úroveň</li><li><b>Komprese</b> – převod na úspornější formát</li></ul>" },
+
+  { t: "netsec",
+    q: "Co je firewall a jak se liší L3 a L7 firewall?",
+    a: "<b>Řídí provoz mezi sítěmi s různou úrovní důvěry podle pravidel.</b><ul><li><b>L3/L4 firewall</b> – filtruje podle <b>IP adres a portů</b> (rychlý, jako router; např. ufw/iptables)</li><li><b>L7 (aplikační) firewall</b> – analyzuje <b>obsah paketů</b> (malware, hrozby), pokročilá pravidla</li><li><b>Proxy / aplikační brána</b> – zcela odděluje sítě dvěma spojeními (NAT), vysoké zabezpečení, ale pomalé</li></ul>" },
+
+  { t: "netsec",
+    q: "Co jsou bezpečnostní funkce sítě (AAA + CIA)?",
+    a: "<ul><li><b>Autentizace</b> – ověření identity (heslo, klíč, biometrika)</li><li><b>Autorizace</b> – oprávnění použít zdroj</li><li><b>Accounting</b> – sledování využití/akcí</li><li><b>Důvěrnost</b> (šifrování), <b>Integrita</b>, <b>Nepopiratelnost</b></li></ul>(První tři = <b>AAA</b>.)" },
+
+  { t: "netsec",
+    q: "Co je certifikát a certifikační autorita (CA)?",
+    a: "<b>Protože je veřejný klíč dostupný všem, je třeba ověřit, komu patří.</b><ul><li><b>Certifikát</b> obsahuje jméno vlastníka, veřejný klíč, dobu platnosti a <b>podpis vydavatele</b></li><li><b>Certifikační autorita (CA)</b> – důvěryhodná organizace, která certifikáty vydává a podepisuje</li></ul>Riziko: důvěra k mnoha předinstalovaným CA, podepsaný ≠ důvěryhodný (kdo ho vydal?)." },
+
+  { t: "netsec",
+    q: "Jak řeší autentizace problém čerstvosti (nonce)?",
+    a: "<ul><li><b>Autentizace heslem</b> (šifrovaným sdíleným klíčem) – negarantuje <b>čerstvost</b>, hrozí <b>replay útok</b> (odposlechnuté heslo přehráno znovu)</li><li><b>Challenge-response s nonce</b> – ověřovatel pošle <b>náhodné číslo (nonce)</b>, druhá strana ho zašifruje sdíleným klíčem → stará odpověď už neplatí</li><li><b>Vzájemná autentizace</b> – totéž oboustranně</li></ul>" },
+
+  { t: "netsec",
+    q: "Jak funguje výměna klíčů Diffie-Hellman?",
+    a: "<b>Ustaví sdílený tajný klíč bez jeho posílání po síti.</b> Veřejné N, G:<ol><li>Alice: R₁ = Gˣ mod N → pošle Bobovi</li><li>Bob: R₂ = Gʸ mod N → pošle Alici</li><li>Alice: K = R₂ˣ mod N; Bob: K = R₁ʸ mod N → <b>stejný K</b></li></ol>Bezpečnost stojí na obtížnosti diskrétního logaritmu." },
+
+  { t: "netsec",
+    q: "Jak přesně funguje digitální podpis?",
+    a: "<b>Obrácená asymetrická kryptografie: podepisuje se PRIVÁTNÍM klíčem, ověřuje VEŘEJNÝM.</b><ul><li>Ze zprávy se spočítá <b>hash</b> (MD5/SHA-256), ten se zašifruje privátním klíčem odesílatele</li><li>Pošle se podepsaný hash + plaintext; příjemce ověří veřejným klíčem</li></ul>Zajišťuje <b>integritu, nepopiratelnost i autentizaci</b>. Podpis hashe (ne celého dokumentu) je rychlejší." },
+
+  { t: "netsec",
+    q: "Jak funguje IPSec (AH, ESP, módy)?",
+    a: "<b>Kolekce protokolů pro zabezpečení na L3 (síťová vrstva).</b><ul><li><b>AH (Authentication Header)</b> – autentizace a integrita (ne šifrování)</li><li><b>ESP (Encapsulating Security Payload)</b> – přidává <b>šifrování</b></li></ul>Módy: <b>transportní</b> (IPSec header mezi IP hlavičkou a tělem) a <b>tunelovací</b> (nová IP hlavička – základ VPN). Nemá vlastní správu klíčů." },
+
+  { t: "netsec",
+    q: "Jak probíhá TLS/SSL handshake?",
+    a: "<b>Hybridní šifrování: asymetricky se vymění symetrický klíč, jím se pak šifruje provoz.</b><ol><li>Klient → požadavek (verze, šifry)</li><li>Server → odpověď + <b>certifikát</b> (veřejný klíč)</li><li>Klient ověří certifikát, vygeneruje základ klíče, zašifruje veřejným klíčem serveru a pošle</li><li>Server dešifruje privátním klíčem → obě strany odvodí <b>symetrický klíč</b></li></ol>TLS leží mezi L4 a L7; vytváří HTTPS, FTPS." },
+
+  { t: "netsec",
+    q: "Jaké aplikační protokoly používají TCP a které UDP?",
+    a: "<ul><li><b>TCP</b> (spolehlivé): HTTP(80), HTTPS(443), FTP(21/20), SMTP(25), SSH(22), IMAP, POP3, Telnet, RDP</li><li><b>UDP</b> (rychlé): DNS(53), DHCP, TFTP, NTP, streaming (RTP)</li></ul>Aplikační protokol definuje typy zpráv, syntax, sémantiku a pravidla komunikace." },
+
+  { t: "netsec",
+    q: "Co je WWW a kdo ho vytvořil?",
+    a: "<b>Web je systém prohlížení a odkazování dokumentů na Internetu – NENÍ to Internet (běží na něm).</b><ul><li>Autor <b>Tim Berners-Lee</b> (CERN, 1990) – navrhl HTML, HTTP, první prohlížeč i server</li><li>Dokumenty adresovány <b>URL</b>, přenášeny <b>HTTP</b></li></ul>" },
+
+  { t: "netsec",
+    q: "Jaké jsou prevence zahlcení a co je WRED?",
+    a: "<b>Standardně se fronta plní, dokud není plná → pak teprve zahazuje (vznikají vlny synchronizace).</b><ul><li><b>RED (Random Early Detection)</b> – při překročení meze náhodně zahazuje pakety (pravděpodobnost roste se zaplněním) → odstraní globální synchronizaci</li><li><b>WRED</b> – RED zohledňující <b>prioritu</b> paketu (méně důležité zahazuje dřív)</li></ul>" },
+
+  { t: "netsec",
+    q: "Proč je FTP nezabezpečené a jaké jsou bezpečné alternativy?",
+    a: "<ul><li><b>FTP</b> – přenáší heslo i data <b>v plaintextu</b>; používá <b>řídicí (21)</b> a <b>datové (20)</b> spojení</li><li><b>FTPS</b> – FTP přes <b>TLS/SSL</b> (šifrovaná nadstavba)</li><li><b>SFTP</b> – úplně jiný protokol přes <b>SSH</b> (port 22), ne příbuzný FTP</li></ul>" }
 );

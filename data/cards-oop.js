@@ -48,5 +48,77 @@ FC.cards.push(
 
   { t: "oop",
     q: "Jaké jsou výhody a nevýhody OOP?",
-    a: "<ul><li><b>Výhody</b>: zapouzdření a modularita, znovupoužití (dědičnost), rozšiřitelnost (polymorfismus), modelování reálných entit, snazší údržba</li><li><b>Nevýhody</b>: vyšší režie a složitost, riziko přílišné abstrakce/hluboké hierarchie dědičnosti, horší datová lokalita/výkon oproti nízkoúrovňovému přístupu</li></ul>Realizace v C#/C++/Java – liší se např. vícenásobnou dědičností (C++ ano, Java jen rozhraní)." }
+    a: "<ul><li><b>Výhody</b>: zapouzdření a modularita, znovupoužití (dědičnost), rozšiřitelnost (polymorfismus), modelování reálných entit, snazší údržba</li><li><b>Nevýhody</b>: vyšší režie a složitost, riziko přílišné abstrakce/hluboké hierarchie dědičnosti, horší datová lokalita/výkon oproti nízkoúrovňovému přístupu</li></ul>Realizace v C#/C++/Java – liší se např. vícenásobnou dědičností (C++ ano, Java jen rozhraní)." },
+
+  { t: "oop",
+    q: "Jaká jsou hlavní programovací paradigmata?",
+    a: "<ul><li><b>Imperativní (procedurální)</b> – popisuje JAK (pořadí instrukcí): strukturované (C), OOP (Java)</li><li><b>Deklarativní</b> – popisuje CO: <b>funkcionální</b> (Haskell – vše funkce), <b>logické</b> (Prolog – definice pravdy)</li></ul>Podle abstrakce: nízkoúrovňové (Assembler, C) vs vysokoúrovňové." },
+
+  { t: "oop",
+    q: "Jaký je rozdíl mezi kompilovaným a interpretovaným jazykem?",
+    a: "<ul><li><b>Kompilovaný</b> – kód se přeloží do strojového kódu předem (binárka); rychlejší, compiler-side optimalizace (C, Pascal)</li><li><b>Interpretovaný</b> – kód se zpracovává za běhu (interpret/mezikód); vyšší kompatibilita, přehlednost (Python)</li></ul><b>Java</b> – hybridní: bytecode + <b>JIT</b> kompilace za běhu." },
+
+  { t: "oop",
+    q: "Jak se dělí typové systémy (silně/slabě, staticky/dynamicky)?",
+    a: "<table><tr><td></td><td><b>staticky</b></td><td><b>dynamicky</b></td></tr><tr><td><b>silně</b></td><td>Java, C#, Haskell</td><td>Python, Ruby</td></tr><tr><td><b>slabě</b></td><td>C, C++</td><td>JS, PHP</td></tr></table><ul><li><b>Silně</b> typované – zamezují nepodporované operace; <b>slabě</b> – ne</li><li><b>Staticky</b> – kontrola typů při překladu; <b>dynamicky</b> – za běhu</li><li><b>Typová inference</b> – jazyk odvodí typ sám</li></ul>" },
+
+  { t: "oop",
+    q: "Co je abstraktní datový typ (ADT) a generické typy?",
+    a: "<ul><li><b>ADT</b> – implementačně nezávislá specifikace dat + povolených operací (Zásobník, Fronta, Množina). Skrývá detaily implementace.</li><li><b>Generické typy</b> – typový polymorfismus <code>Typ&lt;T&gt;</code>; jedna implementace pro různé typy</li></ul>Zapouzdření se realizuje právě pomocí ADT (data + metody pod jedním jménem)." },
+
+  { t: "oop",
+    q: "Jaký je rozdíl mezi výrazem, příkazem a operátorem? Co je prefix/infix/postfix?",
+    a: "<ul><li><b>Příkaz</b> – provádí akci (přiřazení, if, cyklus)</li><li><b>Výraz</b> – vyhodnotí se na hodnotu</li><li><b>Operátor</b> – vestavěná funkce se speciální notací (unární/binární/ternární)</li></ul>Notace: <b>prefix</b> (+34), <b>infix</b> (3+4), <b>postfix</b> (34+). Vyhodnocení řídí <b>priorita</b> a <b>asociativita</b> (zleva/zprava)." },
+
+  { t: "oop",
+    q: "Co je mutabilita, vazba a aliasing?",
+    a: "<ul><li><b>Mutable</b> – hodnota se mění, identita zůstává; <b>Immutable</b> – změna hodnoty = nová identita</li><li><b>Vazba (binding)</b> – spojení jména s objektem; statická (překlad) nebo dynamická (běh)</li><li><b>Aliasing</b> – více jmen ukazuje na stejný objekt</li></ul>Objekty na haldě uklízí <b>garbage collector</b>." },
+
+  { t: "oop",
+    q: "PŘÍKLAD: Jaký výsledek dá kód při statickém vs dynamickém rozsahu?",
+    a: "<b>Pro <code>const b=5; foo(){return b+5;} bar(){int b=2; return foo();}</code>:</b><ul><li><b>Statický rozsah</b> – foo vidí globální b=5 podle <b>struktury kódu</b> → bar() vrátí <b>10</b></li><li><b>Dynamický rozsah</b> – foo vidí b=2 z volajícího bar() podle <b>pořadí volání</b> → bar() vrátí <b>7</b></li></ul>Většina jazyků používá statický (lexikální) rozsah; dynamický má bash, LaTeX." },
+
+  { t: "oop",
+    q: "Jaké jsou způsoby předávání parametrů (5 variant)?",
+    a: "<ul><li><b>Hodnotou</b> – kopie (mělká u objektů)</li><li><b>Odkazem (sdílením)</b> – předá se reference, efektivní ale nečisté (aliasy)</li><li><b>Jménem</b> – výraz se nevyhodnotí, předá se a vyhodnocuje při použití (funkcionální)</li><li><b>Výsledkem (out)</b> – jen pro vrácení; <b>hodnotou-výsledkem (in-out)</b></li></ul>" },
+
+  { t: "oop",
+    q: "Jaký je rozdíl mezi třídou, rozhraním a abstraktní třídou?",
+    a: "<ul><li><b>Třída</b> – typ i implementace; instanciuje se <code>new</code> → konstruktor</li><li><b>Rozhraní (interface)</b> – jen deklarace metod (+ konstanty); třída může implementovat <b>více</b> rozhraní; <b>nemá diamond problém</b></li><li><b>Abstraktní třída</b> – může mít abstraktní (jen deklarované) i implementované metody; <b>nelze instanciovat</b></li></ul>Java rozhraní: <code>default</code> a <code>static</code> metody." },
+
+  { t: "oop",
+    q: "Co je Liskovové substituční princip (LSP)?",
+    a: "<b>Objekt typu T lze kdekoli nahradit objektem podtřídy S bez negativních důsledků.</b><ul><li>Potomek musí dodržet „kontrakt\" rodiče (chovat se kompatibilně)</li><li>Je to <b>L</b> v <b>SOLID</b> a základ <b>podtypového polymorfismu</b></li></ul>Porušení: potomek vyhazuje výjimky / mění chování tak, že kód pracující s rodičem selže." },
+
+  { t: "oop",
+    q: "Co je diamond problem a jak se řeší?",
+    a: "<b>Třída D dědí z B i C, které obě dědí z A → nejednoznačnost, kterou metodu A použít.</b> Řešení:<ul><li><b>Zákaz</b> vícenásobné dědičnosti tříd (C#, Java – jen rozhraní)</li><li>Dvě kopie A (C++)</li><li>Pořadí deklarací / MRO (Python)</li><li><b>Composition</b> – místo dědičnosti vložit instance jiných tříd dovnitř</li></ul>" },
+
+  { t: "oop",
+    q: "Jaké jsou tři druhy polymorfismu?",
+    a: "<ul><li><b>Ad-hoc (přetěžování / overloading)</b> – stejné jméno, různé parametry; výběr <b>za překladu</b></li><li><b>Parametrický</b> – generické typy, jedna implementace pro různé typy (určeno v runtime)</li><li><b>Podtypový</b> – proměnná typu T drží objekt podtřídy; OOP přístup (LSP)</li></ul>" },
+
+  { t: "oop",
+    q: "Jaký je rozdíl mezi časnou a pozdní vazbou?",
+    a: "<table><tr><td></td><td><b>časná (statická)</b></td><td><b>pozdní (dynamická)</b></td></tr><tr><td>kdy</td><td>za překladu</td><td>za běhu</td></tr><tr><td>podle</td><td>deklarovaného typu</td><td>skutečného typu</td></tr><tr><td>C#</td><td><code>new</code> (skrytí)</td><td><code>virtual</code>+<code>override</code></td></tr></table><ul><li>Pozdní vazba je pomalejší (adresa se dohledá), umožňuje <b>overriding</b></li></ul>" },
+
+  { t: "oop",
+    q: "Co je tabulka virtuálních metod (VMT / vtable)?",
+    a: "<b>Mechanismus pozdní vazby: každý objekt nese ukazatel na tabulku virtuálních metod své třídy.</b><ul><li>Tabulka obsahuje <b>odkazy na implementace</b> virtuálních metod (jedna na třídu, sdílená instancemi)</li><li>Při dědění se zkopíruje; u <b>přepsaných (override)</b> metod se odkaz přesměruje</li><li>Volání = dereference přes vtable (proto pomalejší než časná vazba)</li></ul>" },
+
+  { t: "oop",
+    q: "Jak fungují výjimky (checked vs unchecked, try-catch-finally)?",
+    a: "<b>Výjimka = objekt nesoucí informace o chybě; propaguje se nahoru zásobníkem volání, dokud ji handler nezachytí.</b><ul><li><b>try-catch-finally</b> – finally se provede <b>vždy</b>; výjimku lze znovu vyhodit (throw)</li><li><b>Checked (kontrolované)</b> – metoda musí chytit nebo deklarovat <code>throws</code></li><li><b>Unchecked</b> – RuntimeException (dělení nulou, index out of bounds)</li></ul>Nevýhoda: obsluha je relativně drahá." },
+
+  { t: "oop",
+    q: "Co je event-driven programming?",
+    a: "<b>Tok programu řízený událostmi (asynchronní programování), typické pro GUI.</b><ul><li>Události se řadí do <b>fronty</b> (message dispatcher)</li><li>Reagují na ně <b>posluchače (EventListener)</b></li><li>Obsluha běží mimo hlavní vlákno → aplikace <b>nezamrzá</b></li></ul>" },
+
+  { t: "oop",
+    q: "Co je princip SOLID?",
+    a: "<ul><li><b>S</b> – Single responsibility: třída má jedinou zodpovědnost</li><li><b>O</b> – Open/closed: otevřená pro rozšíření, uzavřená pro modifikaci</li><li><b>L</b> – Liskov substitution: potomek nahraditelný za rodiče</li><li><b>I</b> – Interface segregation: malá specifická rozhraní</li><li><b>D</b> – Dependency inversion: záviset na abstrakcích, ne implementacích</li></ul>" },
+
+  { t: "oop",
+    q: "Co je boxing a co jsou čisté funkce/predikáty/generátory?",
+    a: "<ul><li><b>Boxing</b> – zabalení hodnotového typu do objektu (Java <code>int</code> → <code>Integer</code>)</li><li><b>Čistá funkce</b> – bez vedlejších efektů, stejný vstup → stejný výstup</li><li><b>Predikát</b> – funkce vracející True/False</li><li><b>Generátor</b> – vrací hodnotu po jedné při <code>.next()</code></li></ul>Procedura (nevrací hodnotu) může mít vedlejší efekty; funkce vrací hodnotu." }
 );

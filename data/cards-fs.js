@@ -88,5 +88,53 @@ FC.cards.push(
 
   { t: "fs",
     q: "Je čtení u RAID 1 rychlejší než u RAID 0?",
-    a: "<ul><li><b>RAID 0 (striping)</b> – zápis i čtení paralelně přes oba disky → vysoká propustnost, ale data jen jednou</li><li><b>RAID 1 (mirroring)</b> – stejná data na obou discích, takže <b>čtení lze rozdělit mezi disky</b> (každý čte jinou část / vyřídí jiný požadavek) → čtení může být velmi rychlé. <b>Zápis</b> ale musí na oba (žádné zrychlení).</li></ul>U HDD hraje roli i poloha hlaviček – nezávislé hlavy obslouží více požadavků současně." }
+    a: "<ul><li><b>RAID 0 (striping)</b> – zápis i čtení paralelně přes oba disky → vysoká propustnost, ale data jen jednou</li><li><b>RAID 1 (mirroring)</b> – stejná data na obou discích, takže <b>čtení lze rozdělit mezi disky</b> (každý čte jinou část / vyřídí jiný požadavek) → čtení může být velmi rychlé. <b>Zápis</b> ale musí na oba (žádné zrychlení).</li></ul>U HDD hraje roli i poloha hlaviček – nezávislé hlavy obslouží více požadavků současně." },
+
+  { t: "fs",
+    q: "Co je VFS (Virtual Filesystem Switch)?",
+    a: "<b>API jádra pro jednotný přístup k různým souborovým systémům.</b><ul><li>Aplikace volají stejné operace (open/read/write) bez ohledu na to, zda je pod tím ext4, NTFS, FAT…</li><li>Umožňuje <b>mount</b> – připojení úložiště tak, že jeho kořen se stane složkou v jiném FS</li></ul>Struktura FS bývá implementovaná B-stromy." },
+
+  { t: "fs",
+    q: "Jak se implementuje adresář (old-style, hash, tree)?",
+    a: "<b>Adresář je seznam záznamů (jméno → inode):</b><ul><li><b>Old-style</b> – netříděný seznam → vyhledání lineární (pomalé)</li><li><b>Hash-based</b> – přečtení jediného bloku, konstantní složitost (pořadí náhodné)</li><li><b>Tree-based (B-strom)</b> – jména jsou klíče, operace logaritmické, optimalizováno pro bloky</li></ul>" },
+
+  { t: "fs",
+    q: "Proč inode neobsahuje jméno souboru?",
+    a: "<b>Inode drží jen metadata + seznam datových bloků, ne jméno.</b><ul><li>Jméno je v <b>adresáři</b> (jméno → číslo inode) → soubor lze <b>odlinkovat / přejmenovat bez přepisování dat</b></li><li>Na jeden inode může ukazovat více jmen (<b>hardlinky</b>, všechny rovnocenné)</li><li>Speciální inode reprezentuje i adresáře, symlinky, zařízení (special file)</li></ul>" },
+
+  { t: "fs",
+    q: "Jaký je rozdíl mezi file descriptorem a handle?",
+    a: "<ul><li><b>UNIX – file descriptor</b>: <b>integer index</b> do tabulky otevřených souborů; index zůstane platný i po přesunu souboru</li><li><b>Windows – handle</b>: <b>struktura</b>, ne pouhý integer (nižší abstrakce)</li></ul>Soubor je třeba před prací <b>otevřít</b> (open ověří práva u jádra) a uvolnit." },
+
+  { t: "fs",
+    q: "Jak se eviduje volné místo – bitmapa vs tabulka vs B-strom?",
+    a: "<ul><li><b>Bitmapa</b> – 1 bit = 1 blok; blok bitmapy (4 KB) pokryje 128 MB; flip bitu je atomický. FS lze dělit na <b>alokační skupiny</b> s vlastní bitmapou.</li><li><b>Tabulka inodů</b> – řádky = inody, alokace přes bitmapu</li><li><b>B-strom</b> – nahradí bitmapy i tabulky; klíčem adresy bloků → podstromy = intervaly volného místa</li></ul>" },
+
+  { t: "fs",
+    q: "Jak funguje žurnál a jak ho používá ext4?",
+    a: "<b>Žurnál (write-ahead log) udržuje sekvenci akcí, které se mají provést.</b><ul><li>Změny metadat nastanou <b>až po ukončení transakce</b>; při nekonzistenci (výpadek) se nedokončená transakce zahodí a obnoví předchozí stav</li><li><b>ext4 má 2 žurnály</b>: low-level (zápisy do bloků) a high-level (transakce typu „smaž soubor\")</li></ul>Náhrada za pomalý fsck po pádu." },
+
+  { t: "fs",
+    q: "Co je checksum a snapshot v souborovém systému?",
+    a: "<ul><li><b>Checksum</b> – kontrolní hodnota odvozená z dat (součást metadat) pro <b>detekci korupce</b>; s checksumy jsou data větší</li><li><b>Snapshot</b> – kopie celého FS; posloupnost snapshotů ukládá jen <b>změny</b> oproti předchozímu (jako git)</li></ul>" },
+
+  { t: "fs",
+    q: "Co je znakové zařízení a roura (pipe)?",
+    a: "<ul><li><b>Znakové zařízení</b> – proud bytů napojený na periferii (tiskárna, terminál), sekvenční přístup</li><li><b>Roura (pipe)</b> – komunikační soubor: jeden proces zapisuje, druhý čte</li></ul>Znakové zařízení používá rouru pro komunikaci periferie ↔ aplikace. Oproti tomu <b>blokové zařízení</b> = adresovatelné pole bloků s náhodným přístupem." },
+
+  { t: "fs",
+    q: "PŘÍKLAD: Jak I/O plánovač zrychlí zápisy přeskládáním?",
+    a: "<b>Plánovač řadí požadavky do fronty a slučuje sousední, aby minimalizoval pohyb hlavy (seek).</b><ul><li>Příjem prokládaně: A₁B₁C₁A₂B₂A₃C₂B₃C₃ → 9 jednotlivých zápisů</li><li>Po přeskládání: A₁A₂A₃ − B₁B₂B₃ − C₁C₂C₃ → <b>3 souvislé zápisy</b></li></ul>Kontinuální čtení/zápis je nejrychlejší → fragmentace výrazně zpomaluje." },
+
+  { t: "fs",
+    q: "Jak přesně funguje memory-mapped I/O (private vs shared, dirty, sync)?",
+    a: "<b>Soubor se mapuje do virtuálního adresního prostoru bez fyzických rámců; první přístup → page fault → načtení do page cache.</b><ul><li><b>Private</b> – změny jen ve virtuální paměti procesu (copy-on-write)</li><li><b>Shared</b> – změny se zapíší zpět do souboru</li><li><b>Dirty stránka</b> (změněná) se zapíše na disk; <b>sync</b> vynutí zápis</li></ul>Výhody: méně kopírování, sdílení mezi procesy. Spravuje procesor (rozdíl oproti DMA)." },
+
+  { t: "fs",
+    q: "Jaký je rozdíl mezi pollingem a přerušením, PIO a DMA?",
+    a: "<ul><li><b>Polling</b> – CPU periodicky kontroluje zařízení (USB host se ptá zařízení); <b>přerušení</b> – zařízení samo „zakřičí\" (PS/2 IRQ)</li><li><b>PIO</b> – procesor aktivně přenáší data (blokující, režie)</li><li><b>DMA</b> – zařízení zapisuje přímo do RAM bez CPU; má plný přístup → <b>IO-MMU</b> řeší zabezpečení překladem adres</li></ul>" },
+
+  { t: "fs",
+    q: "Jaké jsou méně obvyklé úrovně RAID (2, 3, 4) a jak funguje šifrování disku?",
+    a: "<ul><li><b>RAID 2</b> – po bitech s Hammingovým kódem; <b>RAID 3</b> – po bajtech s dedikovaným paritním diskem; <b>RAID 4</b> – po blocích s dedikovaným paritním diskem (RAID 5 paritu distribuuje)</li><li><b>Šifrování</b> probíhá na úrovni <b>bloků</b> symetrickou blokovou šifrou (<b>AES</b>), zachovává velikost dat</li></ul>Komprese (LZ77, Huffman) je bezztrátová, ztrátová je na disku nevhodná." }
 );

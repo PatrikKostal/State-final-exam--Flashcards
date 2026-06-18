@@ -63,7 +63,7 @@ FC.cards.push(
 
   { t: "db",
     q: "Jaké jsou typy funkčních závislostí?",
-    a: "<b>X → Y: stejná hodnota X ⟹ stejná hodnota Y.</b><ul><li><b>Triviální</b>: Y ⊆ X (platí vždy)</li><li><b>Úplná (full)</b>: Y závisí na celém X, ne na žádné jeho části</li><li><b>Částečná (parciální)</b>: stačí část X (∃ γ ⊂ X: γ → Y)</li><li><b>Tranzitivní</b>: X → γ → Y (přes prostředníka)</li></ul>Příklad tranzitivní: rodné číslo → datum narození." },
+    a: "<b>X → Y: stejná hodnota X ⟹ stejná hodnota Y.</b><ul><li><b>Triviální</b>: Y ⊆ X (platí vždy)</li><li><b>Úplná (full)</b>: Y závisí na celém X, ne na žádné jeho části</li><li><b>Částečná (parciální)</b>: stačí část X (∃ γ ⊂ X: γ → Y)</li><li><b>Tranzitivní</b>: X → γ → Y (přes prostředníka)</li></ul>Příklad tranzitivní: čísloStudenta → čísloKatedry → názevKatedry (a čísloKatedry není klíč)." },
 
   { t: "db",
     q: "Jaké jsou Armstrongovy axiomy?",

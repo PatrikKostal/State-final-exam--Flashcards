@@ -12,7 +12,7 @@ FC.cards.push(
 
   { t: "fun",
     q: "Co je redukční krok a jaké jsou redukční strategie?",
-    a: "<b>Redukční krok = nahrazení části výrazu (redexu) podle definice funkce.</b> Strategie určuje, který redex redukovat první:<ul><li><b>Striktní (eager, aplikativní)</b> – nejdřív vyhodnotí <b>argumenty</b>, pak aplikuje funkci (call-by-value)</li><li><b>Normální (líná, leftmost-outermost)</b> – nejdřív aplikuje <b>vnější funkci</b>, argumenty vyhodnotí až když jsou potřeba (call-by-name)</li></ul>" },
+    a: "<b>Redukční krok = nahrazení části výrazu (redexu) podle definice funkce.</b> Strategie určuje, který redex redukovat první:<ul><li><b>Striktní (eager, aplikativní)</b> – nejdřív vyhodnotí <b>argumenty</b>, pak aplikuje funkci (call-by-value)</li><li><b>Normální (leftmost-outermost)</b> – nejdřív aplikuje <b>vnější funkci</b>, argumenty vyhodnotí až když jsou potřeba (call-by-name). Tuto strategii používá <b>Haskell</b> (s líným vyhodnocováním)</li><li><b>Líná (lazy)</b> – <b>pamatuje si již vyhodnocené výrazy</b> a žádný nevyhodnocuje opakovaně (sdílení). Umožňuje <b>nekonečná data</b>, ale nelze ji použít při <b>vedlejších efektech</b>. <b>Pozor:</b> líné vyhodnocování ≠ líná strategie</li></ul>" },
 
   { t: "fun",
     q: "Jaká je vlastnost normální vs striktní strategie? (příklad zacyklení)",

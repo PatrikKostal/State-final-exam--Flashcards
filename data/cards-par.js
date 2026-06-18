@@ -103,7 +103,7 @@ FC.cards.push(
 
   { t: "par",
     q: "Jaký je vzorec Amdahlova zákona a co je superlineární zrychlení?",
-    a: "<b>S_max = 1 / ((1−p) + p/Sₚ)</b>, kde p = paralelizovatelný podíl, Sₚ = zrychlení paralelní části.<ul><li>Příklad: p=0,3, Sₚ=4 → S = 1/(0,7 + 0,075) = <b>1,29</b> (129 %)</li><li>Při p→∞ je strop <b>1/(1−p)</b></li></ul><b>Superlineární zrychlení</b> (&gt; p×) – buď falešné (špatný sekvenční referent), nebo skutečné (víc vláken = víc cache, průzkumová dekompozice)." },
+    a: "<b>S_max = 1 / ((1−p) + p/Sₚ)</b>, kde p = paralelizovatelný podíl, Sₚ = zrychlení paralelní části.<ul><li>Příklad: p=0,3, Sₚ=4 → S = 1/(0,7 + 0,075) = <b>1,29</b> (129 %)</li><li>Při Sₚ→∞ je strop <b>1/(1−p)</b></li></ul><b>Superlineární zrychlení</b> (&gt; p×) – buď falešné (špatný sekvenční referent), nebo skutečné (víc vláken = víc cache, průzkumová dekompozice)." },
 
   { t: "par",
     q: "Co je škálovatelnost a izoefektivní funkce?",

@@ -24,7 +24,7 @@ FC.cards.push(
 
   { t: "stat",
     q: "Co je distribuční funkce a funkce hustoty pravděpodobnosti?",
-    a: "<ul><li><b>Distribuční funkce F(x) = P(X ≤ x)</b> – pravděpodobnost, že veličina nepřekročí x. Je <b>neklesající</b>, zleva/zprava spojitá, jde od 0 do 1. U diskrétní veličiny je <b>schodovitá</b>, u spojité <b>hladká</b>.</li><li><b>Hustota pravděpodobnosti f(x)</b> (spojitá veličina) – <b>derivace distribuční funkce</b> (F'(x) = f(x)); pravděpodobnost = obsah pod hustotou na intervalu. Celkový obsah = 1.</li></ul>" },
+    a: "<ul><li><b>Distribuční funkce F(x) = P(X ≤ x)</b> – pravděpodobnost, že veličina nepřekročí x. Je <b>neklesající</b>, <b>zprava spojitá</b>, jde od 0 do 1. U diskrétní veličiny je <b>schodovitá</b>, u spojité <b>hladká</b>.</li><li><b>Hustota pravděpodobnosti f(x)</b> (spojitá veličina) – <b>derivace distribuční funkce</b> (F'(x) = f(x)); pravděpodobnost = obsah pod hustotou na intervalu. Celkový obsah = 1.</li></ul>" },
 
   { t: "stat",
     q: "Co je náhodná veličina a jaká znáš rozdělení?",

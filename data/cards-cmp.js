@@ -28,7 +28,7 @@ FC.cards.push(
 
   { t: "cmp",
     q: "Co je otázka P vs NP?",
-    a: "<b>Je P = NP?</b> Tedy: lze každý problém, jehož řešení jde rychle ověřit, také rychle vyřešit?<ul><li>Jeden z <b>nejdůležitějších otevřených problémů</b> informatiky (Milleniová cena 1 mil. $)</li><li>Obecně se věří, že <b>P ≠ NP</b> (ověřit ≠ vyřešit)</li><li>Kdyby P = NP, zhroutila by se moderní kryptografie a mnoho \"těžkých\" problémů by bylo snadných</li></ul>" },
+    a: "<b>Je P = NP?</b> Tedy: lze každý problém, jehož řešení jde rychle ověřit, také rychle vyřešit?<ul><li>Jeden z <b>nejdůležitějších otevřených problémů</b> informatiky (Mileniová cena 1 mil. $)</li><li>Obecně se věří, že <b>P ≠ NP</b> (ověřit ≠ vyřešit)</li><li>Kdyby P = NP, zhroutila by se moderní kryptografie a mnoho \"těžkých\" problémů by bylo snadných</li></ul>" },
 
   { t: "cmp",
     q: "Co je polynomiální redukce?",

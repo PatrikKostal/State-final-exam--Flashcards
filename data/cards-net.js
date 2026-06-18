@@ -15,7 +15,7 @@ FC.cards.push(
 
   { t: "net",
     q: "Co dělá fyzická vrstva a jak funguje Manchester kódování?",
-    a: "<b>Přenáší jednotlivé bity jako fyzické signály</b> (napětí, světlo, rádio); řeší kódování, modulaci, média.<ul><li><b>Manchester kódování</b> – každý bit reprezentuje <b>přechod uprostřed intervalu</b>: 0 = přechod ↑, 1 = přechod ↓ (nebo opačně dle konvence)</li><li>Výhoda: <b>samosynchronizace</b> (hodiny v signálu); nevýhoda: <b>dvojnásobná šířka pásma</b></li></ul>Příklad „010\": ↑ ↓ ↑ (tři přechody)." },
+    a: "<b>Přenáší jednotlivé bity jako fyzické signály</b> (napětí, světlo, rádio); řeší kódování, modulaci, média.<ul><li><b>Manchester kódování</b> – každý bit reprezentuje <b>přechod uprostřed intervalu</b>: 0 = přechod ↓, 1 = přechod ↑ (IEEE 802.3, nebo opačně dle konvence)</li><li>Výhoda: <b>samosynchronizace</b> (hodiny v signálu); nevýhoda: <b>dvojnásobná šířka pásma</b></li></ul>Příklad „010\": ↓ ↑ ↓ (tři přechody)." },
 
   { t: "net",
     q: "Co řeší spojová vrstva (MAC, řízení přístupu k médiu)?",

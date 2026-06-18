@@ -52,7 +52,7 @@ FC.cards.push(
 
   { t: "lin",
     q: "Jak vypadá matice rotace a jak se použije?",
-    a: "<b>Rotace v rovině o úhel φ:</b> <code>[[cos φ, −sin φ], [sin φ, cos φ]]</code>.<ul><li>Aplikuje se násobením na souřadnice bodu/vektoru</li><li>Pro 90°: cos 90°=0, sin 90°=1 → <code>[[0,−1],[1,0]]</code>, takže bod (x,y) → (−y, x)</li><li>Je to <b>ortogonální matice</b> (det = 1, zachovává délky a úhly)</li></ul>" },
+    a: "<b>Rotace v rovině o úhel φ:</b> <code>[[cos φ, −sin φ], [sin φ, cos φ]]</code>.<ul><li>Aplikuje se násobením na souřadnice bodu/vektoru</li><li>Pro 90°: cos 90°=0, sin 90°=1 → <code>[[0,−1],[1,0]]</code>, takže bod (x,y) → (−y, x)</li><li>Rotace je <b>ortogonální matice s det = 1</b> (obecně mají ortogonální matice det = ±1; det = −1 je zrcadlení); zachovává délky a úhly</li></ul>" },
 
   { t: "lin",
     q: "Jaký je vzorec pro velikost vektoru a pro úhel mezi vektory?",

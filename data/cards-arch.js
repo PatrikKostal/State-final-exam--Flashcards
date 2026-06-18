@@ -120,7 +120,7 @@ FC.cards.push(
 
   { t: "arch",
     q: "Co je endianita (little vs big endian)?",
-    a: "<b>Způsob uložení bajtů víceбajtového čísla v paměti.</b><ul><li><b>Little-endian</b> – nejméně významný bajt na <b>nejnižší adrese</b> (x86); výhoda: char a int na stejné adrese mají stejnou hodnotu</li><li><b>Big-endian</b> – nejvýznamnější bajt na nejnižší adrese (síťové pořadí)</li></ul>" },
+    a: "<b>Způsob uložení bajtů vícebajtového čísla v paměti.</b><ul><li><b>Little-endian</b> – nejméně významný bajt na <b>nejnižší adrese</b> (x86); výhoda: char a int na stejné adrese mají stejnou hodnotu</li><li><b>Big-endian</b> – nejvýznamnější bajt na nejnižší adrese (síťové pořadí)</li></ul>" },
 
   { t: "arch",
     q: "Jaké cachovací algoritmy a úrovně cache znáš?",

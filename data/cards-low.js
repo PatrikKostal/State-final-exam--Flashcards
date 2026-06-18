@@ -83,7 +83,7 @@ FC.cards.push(
 
   { t: "low",
     q: "K čemu slouží klíčové slovo const a jak ho lze obejít?",
-    a: "<b>const označuje konstantu – překladač hlídá, že se hodnota nemění (prevence chyb).</b><ul><li>Lze ho „ošálit\": přiřazením <code>const int*</code> do necosnt ukazatele (kompilátor jen varuje), pak přes něj zapsat</li><li>Je to ale <b>nechtěné a nebezpečné</b> (undefined behaviour, pokud byl objekt skutečně konstantní)</li></ul>" },
+    a: "<b>const označuje konstantu – překladač hlídá, že se hodnota nemění (prevence chyb).</b><ul><li>Lze ho „ošálit\": přiřazením <code>const int*</code> do neconst ukazatele (kompilátor jen varuje), pak přes něj zapsat</li><li>Je to ale <b>nechtěné a nebezpečné</b> (undefined behaviour, pokud byl objekt skutečně konstantní)</li></ul>" },
 
   { t: "low",
     q: "Co je paměť a jak se k ní přistupuje?",
